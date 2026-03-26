@@ -1,4 +1,5 @@
 /** @format */
+import Link from "next/link";
 import { GrDocumentLocked } from "react-icons/gr";
 import { ImGift } from "react-icons/im";
 import { IoDocumentTextOutline } from "react-icons/io5";
@@ -56,12 +57,14 @@ export default function CareBoxSection() {
             essential daily aids and have it delivered quickly and easily to
             your home.
           </p>
-          <button
-            type="button"
-            className="mt-7 rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white"
-          >
-            Apply for a care box now
-          </button>
+          <Link href="/apply-box">
+            <button
+              type="button"
+              className="mt-7 rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            >
+              Apply for a care box now
+            </button>
+          </Link>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-300 mx-auto">
