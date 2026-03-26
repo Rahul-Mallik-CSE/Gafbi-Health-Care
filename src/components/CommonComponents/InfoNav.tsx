@@ -3,7 +3,7 @@
 "use client";
 
 import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -32,25 +32,56 @@ declare global {
 export default function InfoNav() {
   const [language, setLanguage] = useState<"en" | "de">("en");
 
+  const setGoogTransCookie = (targetLanguage: "en" | "de") => {
+    const value = `/en/${targetLanguage}`;
+    const maxAge = 60 * 60 * 24 * 365;
+    document.cookie = `googtrans=${value};path=/;max-age=${maxAge}`;
+    document.cookie = `googtrans=${value};path=/;domain=${window.location.hostname};max-age=${maxAge}`;
+  };
+
+  const syncGoogleSelect = (targetLanguage: "en" | "de") => {
+    const select = document.querySelector(
+      ".goog-te-combo",
+    ) as HTMLSelectElement | null;
+    if (!select) return false;
+
+    select.value = targetLanguage;
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  };
+
+  const removeGoogleBannerFrame = () => {
+    const frame = document.querySelector("iframe.goog-te-banner-frame");
+    if (frame && frame.parentElement) {
+      frame.parentElement.removeChild(frame);
+      document.body.style.top = "0px";
+    }
+  };
+
   const applyLanguage = (targetLanguage: "en" | "de") => {
     setLanguage(targetLanguage);
+    setGoogTransCookie(targetLanguage);
+    removeGoogleBannerFrame();
 
-    const tryApply = () => {
-      const select = document.querySelector(
-        ".goog-te-combo",
-      ) as HTMLSelectElement | null;
-      if (!select) return false;
+    if (targetLanguage === "en") {
+      window.location.reload();
+      return;
+    }
 
-      select.value = targetLanguage;
-      select.dispatchEvent(new Event("change"));
-      return true;
-    };
+    if (syncGoogleSelect(targetLanguage)) return;
 
-    if (tryApply()) return;
-    setTimeout(() => {
-      tryApply();
-    }, 700);
+    let attempts = 0;
+    const interval = window.setInterval(() => {
+      attempts += 1;
+      if (syncGoogleSelect(targetLanguage) || attempts > 20) {
+        window.clearInterval(interval);
+      }
+    }, 250);
   };
+
+  useEffect(() => {
+    setGoogTransCookie("en");
+  }, []);
 
   return (
     <>
@@ -78,6 +109,20 @@ export default function InfoNav() {
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         strategy="afterInteractive"
       />
+
+      <style jsx global>{`
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-gadget-icon,
+        .goog-logo-link,
+        .goog-te-gadget span,
+        .goog-te-balloon-frame {
+          display: none !important;
+        }
+
+        body {
+          top: 0 !important;
+        }
+      `}</style>
 
       <div className="w-full bg-[#8CCFD0] text-[#001a29]">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
