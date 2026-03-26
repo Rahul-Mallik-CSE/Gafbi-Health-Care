@@ -1,10 +1,30 @@
 /** @format */
 
-import Image from "next/image";
+"use client";
 
-const navItems = ["About Us", "Carebox", "Products", "Contact", "FAQs"];
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  { label: "About Us", href: "/#about" },
+  { label: "Carebox", href: "/#carebox" },
+  { label: "Products", href: "/products" },
+  { label: "Contact", href: "/contact" },
+  { label: "FAQs", href: "/faqs" },
+];
 
 export default function NavBar() {
+  const pathname = usePathname();
+
+  const isActiveLink = (href: string) => {
+    if (href.includes("#")) {
+      return pathname === "/";
+    }
+
+    return pathname === href;
+  };
+
   return (
     <header className="w-full bg-[#f3f3f3]">
       <div className="mx-auto flex w-full max-w-625 items-center justify-between px-6 py-4 lg:px-10">
@@ -23,13 +43,15 @@ export default function NavBar() {
 
         <nav className="flex items-center gap-0 overflow-hidden rounded-xl border border-black/10 bg-[#efefef] shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
           {navItems.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="border-r border-black/10 px-3 py-2 text-base  font-medium text-[#3b3b3b] transition-colors hover:bg-white last:border-r-0"
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`border-r border-black/10 px-3 py-2 text-base font-medium text-[#3b3b3b] transition-colors hover:bg-white last:border-r-0 ${
+                isActiveLink(item.href) ? "bg-white" : ""
+              }`}
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
       </div>
