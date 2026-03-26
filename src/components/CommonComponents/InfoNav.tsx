@@ -125,7 +125,7 @@ export default function InfoNav() {
       `}</style>
 
       <div className="w-full bg-[#8CCFD0] text-[#001a29]">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-625 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold tracking-[0.01em]">
             FREE consultation: 030 555 7850 65, Mon-Fri: 8:00-16:00
           </p>
