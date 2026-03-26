@@ -6,7 +6,6 @@ import AboutSection from "@/components/LandingPageComponents/AboutSection";
 import ClientsReviewSection from "@/components/LandingPageComponents/ClientsReviewSection";
 import ProductsSection from "@/components/LandingPageComponents/ProductsSection";
 import ServicesSection from "@/components/LandingPageComponents/ServicesSection";
-import FooterBanner from "@/components/LandingPageComponents/FooterBanner";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <ClientsReviewSection />
       <ProductsSection />
       <ServicesSection />
-      <FooterBanner />
     </div>
   );
 }
