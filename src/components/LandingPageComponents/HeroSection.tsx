@@ -16,8 +16,8 @@ export default function HeroSection() {
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05)_45%,rgba(0,0,0,0.45)_100%)]" />
 
-          <div className="absolute bottom-16 left-16 max-w-[620px] text-white">
-            <h1 className="text-[56px] font-bold leading-[1.08]">
+          <div className="absolute bottom-16 left-16 max-w-200 text-white">
+            <h1 className="text-5xl font-bold leading-[1.08]">
               Gafbi Care Box - Simple
               <br />
               solutions for your care supply

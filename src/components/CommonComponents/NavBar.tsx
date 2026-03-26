@@ -26,7 +26,7 @@ export default function NavBar() {
             <a
               key={item}
               href="#"
-              className="border-r border-black/10 px-4 py-3 text-lg  font-medium text-[#3b3b3b] transition-colors hover:bg-white last:border-r-0"
+              className="border-r border-black/10 px-3 py-2 text-base  font-medium text-[#3b3b3b] transition-colors hover:bg-white last:border-r-0"
             >
               {item}
             </a>
