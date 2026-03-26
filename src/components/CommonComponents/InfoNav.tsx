@@ -2,6 +2,7 @@
 
 "use client";
 
+import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
@@ -133,16 +134,19 @@ export default function InfoNav() {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="rounded-xl border border-[#1b4f75] px-4 py-2 text-xs font-semibold text-[#1b4f75]"
+              className="rounded-xl cursor-pointer border border-[#1b4f75] px-4 py-2 text-xs font-semibold text-[#1b4f75]"
             >
               Apply for emergency call support
             </button>
-            <button
-              type="button"
-              className="rounded-xl bg-[#12456d] px-4 py-2 text-xs font-semibold text-white"
-            >
-              Apply for a box
-            </button>
+            <Link href="/apply-box">
+              <button
+                type="button"
+                className="rounded-xl cursor-pointer bg-[#12456d] px-4 py-2 text-xs font-semibold text-white"
+              >
+                Apply for a box
+              </button>
+            </Link>
+
             <a href="#" className="text-sm font-semibold text-[#1b3f63]">
               Sign in
             </a>

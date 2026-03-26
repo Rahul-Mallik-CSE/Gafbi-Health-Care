@@ -44,7 +44,7 @@ export default function AboutSection() {
 
           <button
             type="button"
-            className="mt-6 rounded-md border border-[#1f5f8f] px-4 py-2 text-sm font-semibold text-[#1f5f8f] sm:text-lg"
+            className="mt-6 cursor-pointer rounded-md border border-[#1f5f8f] px-4 py-2 text-sm font-semibold text-[#1f5f8f] sm:text-lg"
           >
             More about us
           </button>

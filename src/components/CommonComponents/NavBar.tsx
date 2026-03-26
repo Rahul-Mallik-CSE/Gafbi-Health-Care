@@ -25,9 +25,13 @@ export default function NavBar() {
     return pathname === href;
   };
 
+  if (pathname === "/apply-box") {
+    return null;
+  }
+
   return (
     <header className="w-full bg-[#f3f3f3]">
-      <div className="mx-auto flex w-full max-w-625 items-center justify-between px-6 py-4 lg:px-10">
+      <div className="mx-auto flex w-full max-w-625 items-center justify-between px-6 py-0.5 lg:px-10">
         <div className="flex items-center gap-4">
           <Image
             src="/logo.png"

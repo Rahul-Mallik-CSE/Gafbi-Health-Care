@@ -60,7 +60,7 @@ export default function CareBoxSection() {
           <Link href="/apply-box">
             <button
               type="button"
-              className="mt-7 rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white hover:opacity-90 transition-opacity"
+              className="mt-7 cursor-pointer rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white hover:opacity-90 transition-opacity"
             >
               Apply for a care box now
             </button>
