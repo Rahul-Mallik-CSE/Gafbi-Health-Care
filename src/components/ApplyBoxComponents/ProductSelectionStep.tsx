@@ -181,7 +181,7 @@ export default function ProductSelectionStep({
                             Math.max(0, quantity - 1),
                           )
                         }
-                        className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                        className="flex cursor-pointer h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
                       >
                         <AiOutlineMinus className="text-xs" />
                       </button>
@@ -189,7 +189,7 @@ export default function ProductSelectionStep({
                         onClick={() =>
                           updateProductQuantity(product.id, quantity + 1)
                         }
-                        className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                        className="flex cursor-pointer h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
                       >
                         <AiOutlinePlus className="text-xs" />
                       </button>
@@ -239,7 +239,7 @@ export default function ProductSelectionStep({
                             Math.max(0, product.quantity - 1),
                           )
                         }
-                        className="text-red-500 hover:text-red-700"
+                        className="text-red-500 cursor-pointer hover:text-red-700"
                       >
                         ✕
                       </button>
@@ -255,7 +255,7 @@ export default function ProductSelectionStep({
 
             <button
               onClick={handleContinue}
-              className="w-full rounded-md bg-button-bg py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-opacity"
+              className="w-full cursor-pointer rounded-md bg-button-bg py-1 sm:py-2 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-opacity"
             >
               Continue
             </button>

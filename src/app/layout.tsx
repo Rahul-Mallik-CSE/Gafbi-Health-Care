@@ -7,6 +7,7 @@ import InfoNav from "@/components/CommonComponents/InfoNav";
 import NavBar from "@/components/CommonComponents/NavBar";
 import Footer from "@/components/CommonComponents/Footer";
 import FooterBanner from "@/components/LandingPageComponents/FooterBanner";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--color-background)] font-sans">
+        <ToastContainer />
         <InfoNav />
         <NavBar />
 
