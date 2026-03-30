@@ -2,6 +2,8 @@
 
 "use client";
 
+import Image from "next/image";
+import { MoveLeft, MoveRight } from "lucide-react";
 import { useState } from "react";
 
 const reviews = [
@@ -49,7 +51,22 @@ export default function ClientsReviewSection() {
               key={`${review.name}-${i}`}
               className="rounded-xl bg-[#dfe4e8] p-5 sm:p-6"
             >
-              <p className="text-2xl md:text-4xl text-[#00b67a]">★★★★★</p>
+              <div
+                className="flex items-center gap-1"
+                aria-label="5 star review"
+              >
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <Image
+                    key={`review-star-${review.name}-${starIndex}`}
+                    src="/icons/star.svg"
+                    alt="★"
+                    width={20}
+                    height={20}
+                    quality={100}
+                    className="h-5 w-5 md:h-6 md:w-6"
+                  />
+                ))}
+              </div>
               <p className="mt-3 text-sm  leading-[1.65] text-primary sm:text-base md:text-lg">
                 {review.text}
               </p>
@@ -65,9 +82,31 @@ export default function ClientsReviewSection() {
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
           <div>
-            <p className="text-xl md:text-2xl font-semibold text-primary">
-              <span className="text-[#00b67a]">★</span> Trustpilot{" "}
-              <span className="text-[#00b67a]">★★★★★</span> Excellent
+            <p className="flex flex-wrap items-center gap-2 text-xl md:text-2xl font-semibold text-primary">
+              <Image
+                src="/icons/star_1.svg"
+                alt="Star"
+                width={18}
+                height={18}
+                className="h-4.5 w-4.5"
+              />
+              <span>Trustpilot</span>
+              <span
+                className="flex items-center gap-0.5"
+                aria-label="5 star rating"
+              >
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <Image
+                    key={starIndex}
+                    src="/icons/star.svg"
+                    alt="Star"
+                    width={16}
+                    height={16}
+                    className="h-4 w-4"
+                  />
+                ))}
+              </span>
+              <span>Excellent</span>
             </p>
             <p className="mt-2 text-sm text-secondary sm:text-base md:text-lg">
               4.7 ratings based on the 3,219 clients
@@ -83,7 +122,7 @@ export default function ClientsReviewSection() {
               }
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5d8dc] text-[20px] text-[#8a9097]"
             >
-              ←
+              <MoveLeft className="h-5 w-5" aria-hidden="true" />
             </button>
             <button
               type="button"
@@ -91,7 +130,7 @@ export default function ClientsReviewSection() {
               onClick={() => setIndex((prev) => (prev + 1) % reviews.length)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5d8dc] text-[20px] text-[#8a9097]"
             >
-              →
+              <MoveRight className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
         </div>

@@ -1,41 +1,38 @@
 /** @format */
+import Image from "next/image";
 import Link from "next/link";
-import { GrDocumentLocked } from "react-icons/gr";
-import { ImGift } from "react-icons/im";
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { RiSecurePaymentFill, RiVerifiedBadgeLine } from "react-icons/ri";
-import { TbTruckDelivery } from "react-icons/tb";
+
 const careBoxFeatures = [
   {
-    icon: <ImGift />,
+    icon: "/icons/1.svg",
     title: "Customize your Care Box",
     description: "You can customize your care box to suit your needs.",
   },
   {
-    icon: <TbTruckDelivery />,
+    icon: "/icons/2.svg",
     title: "Immediate Dispatch",
     description: "Your order will be dispatched immediately upon receipt.",
   },
   {
-    icon: <GrDocumentLocked />,
+    icon: "/icons/3.svg",
     title: "Completely Uncomplicated",
     description:
       "The processing with the long-term care insurance fund is handled.",
   },
   {
-    icon: <IoDocumentTextOutline />,
+    icon: "/icons/4.svg",
     title: "Flexible with a Customer Account",
     description:
       "You can customize your box, change delivery details, or pause at any time",
   },
   {
-    icon: <RiSecurePaymentFill />,
+    icon: "/icons/5.svg",
     title: "Free of Charge",
     description:
       "Your long-term care insurance covers the cost, so the care box is free for you.",
   },
   {
-    icon: <RiVerifiedBadgeLine />,
+    icon: "/icons/6.svg",
     title: "Quality Assurance",
     description:
       "Quality products such as disinfectant from Schulke are available.",
@@ -67,14 +64,19 @@ export default function CareBoxSection() {
           </Link>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-300 mx-auto">
+        <div className="my-8 md:my-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-300 mx-auto hover:cursor-pointer">
           {careBoxFeatures.map((feature) => (
             <article
               key={feature.title}
-              className="rounded-xl bg-[#dfe4e8] p-5 md:p-6"
+              className="rounded-xl bg-[#dfe4e8] p-5 md:p-6 hover:shadow-sm transition-shadow"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#f4f4f4] text-[22px] text-[#2f2f2f]">
-                {feature.icon}
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4]">
+                <Image
+                  src={feature.icon}
+                  alt={`${feature.title} icon`}
+                  width={32}
+                  height={32}
+                />
               </div>
               <h3 className="text-sm sm:text-base md:text-xl font-bold leading-tight text-primary">
                 {feature.title}
