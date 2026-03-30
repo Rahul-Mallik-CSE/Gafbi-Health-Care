@@ -3,6 +3,6 @@
 import { redirect } from "next/navigation";
 
 export default function AuthIndexPage() {
-  redirect("/auth/signin");
+  redirect("/signin");
   return null;
 }

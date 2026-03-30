@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+// import { toast } from "react-toastify"; // Uncomment if you want to use toast on this page
 
 export default function SignInPage() {
   return (
@@ -41,7 +42,7 @@ export default function SignInPage() {
           />
           <div className="flex justify-end mb-2">
             <Link
-              href="#"
+              href="/forgot-password"
               className="text-xs text-[#1A4B5A] font-semibold hover:underline"
             >
               Forgot password?
@@ -55,7 +56,7 @@ export default function SignInPage() {
           </button>
         </form>
         <Link
-          href="/auth/register"
+          href="/register"
           className="block mt-4 border border-[#1A4B5A] text-[#1A4B5A] rounded px-3 py-2 text-center font-semibold hover:bg-[#1A4B5A] hover:text-white transition"
         >
           Create a new account

@@ -31,7 +31,14 @@ declare global {
   }
 }
 
-const HIDDEN_ROUTES = ["/apply-box", "/signin", "/register", "/terms", "/privacy"];
+const HIDDEN_ROUTES = [
+  "/apply-box",
+  "/signin",
+  "/register",
+  "/forgot-password",
+  "/verify-otp",
+];
+// "/signin", "/register", "/terms", "/privacy"
 
 export default function InfoNav() {
   const [language, setLanguage] = useState<"en" | "de">("en");
@@ -153,9 +160,12 @@ export default function InfoNav() {
               </button>
             </Link>
 
-            <a href="#" className="text-sm font-semibold text-[#1b3f63]">
+            <Link
+              href="/signin"
+              className="text-sm font-semibold text-[#1b3f63]"
+            >
               Sign in
-            </a>
+            </Link>
 
             <div className="flex items-center rounded-xl bg-white p-1 text-sm font-medium text-[#123a5b]">
               <button
