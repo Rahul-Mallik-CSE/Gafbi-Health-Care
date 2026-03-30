@@ -2,6 +2,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { MoveLeft, NotebookText, RefreshCw } from "lucide-react";
 import React, { useState, useRef } from "react";
 import { PiWarning } from "react-icons/pi";
@@ -28,6 +29,7 @@ export default function ApplicationStep({
   const [isDrawing, setIsDrawing] = useState(false);
   const [showPrivateInsuranceModal, setShowPrivateInsuranceModal] =
     useState(false);
+  const [showInsuranceTipModal, setShowInsuranceTipModal] = useState(false);
 
   const handleInputChange = (
     section: string,
@@ -191,9 +193,6 @@ export default function ApplicationStep({
                 <PiWarning />
               </span>
             </label>
-            <p className="mb-2 text-xs text-yellow-600">
-              Tip: Find insurance number
-            </p>
             <input
               type="text"
               placeholder="Insurance Number"
@@ -203,6 +202,13 @@ export default function ApplicationStep({
               }
               className="w-full rounded-md border border-gray-300 px-4 py-2 sm:py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-button-bg"
             />
+            <button
+              type="button"
+              onClick={() => setShowInsuranceTipModal(true)}
+              className="mb-2 inline-flex items-center text-xs text-yellow-600 underline cursor-pointer sm:text-sm mt-1 gap-1"
+            >
+             <Image src='/icons/Lightbulb.svg' alt='tips' width={20} height={20} /> Tip: Find insurance number
+            </button>
           </div>
         </div>
 
@@ -345,6 +351,41 @@ export default function ApplicationStep({
               className="w-full rounded-md bg-button-bg py-3 text-xs sm:text-sm font-semibold text-white hover:opacity-90 transition-all"
             >
               Ok
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showInsuranceTipModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="w-full max-w-md rounded-lg bg-white p-4 sm:p-6">
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold text-primary">
+                Your insurance number
+              </h3>
+              <p className="mt-2 text-sm text-secondary">
+                Please enter the insurance number including the capital letter
+                in the field.
+              </p>
+            </div>
+
+            <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+              <Image
+                src="/insurance.png"
+                alt="Insurance card example"
+                width={680}
+                height={410}
+                className="h-auto w-full rounded-md"
+                priority
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowInsuranceTipModal(false)}
+              className="mt-4 w-full rounded-md cursor-pointer bg-button-bg py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-all"
+            >
+              Done
             </button>
           </div>
         </div>
