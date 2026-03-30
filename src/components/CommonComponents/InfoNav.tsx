@@ -31,6 +31,8 @@ declare global {
   }
 }
 
+const HIDDEN_ROUTES = ["/apply-box", "/signin", "/register", "/terms", "/privacy"];
+
 export default function InfoNav() {
   const [language, setLanguage] = useState<"en" | "de">("en");
   const pathname = usePathname();
@@ -86,7 +88,7 @@ export default function InfoNav() {
     setGoogTransCookie("en");
   }, []);
 
-  if (pathname === "/apply-box") return null;
+  if (HIDDEN_ROUTES.includes(pathname)) return null;
 
   return (
     <>

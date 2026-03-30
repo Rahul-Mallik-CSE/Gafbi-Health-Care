@@ -35,7 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`${asapCondensed.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-(--color-background) overflow-x-hidden">
+      <body className="min-h-full flex flex-col bg-[--color-background] overflow-x-hidden">
         <ToastContainer />
         <InfoNav />
         <NavBar />
