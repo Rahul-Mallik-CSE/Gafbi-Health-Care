@@ -1,5 +1,7 @@
 /** @format */
 
+import Image from "next/image";
+
 const quickLinks = [
   "Apply for a care box",
   "Apply for emergency call support (home)",
@@ -32,7 +34,13 @@ export default function Footer() {
                   aria-label="Submit email"
                   className="bg-[#1f5f8f] cursor-pointer px-4 text-white"
                 >
-                  ↗
+                  <Image
+                    src="/icons/news_letter.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="h-5 w-5"
+                  />
                 </button>
               </div>
             </div>
