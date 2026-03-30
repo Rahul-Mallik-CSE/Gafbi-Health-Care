@@ -11,6 +11,7 @@ export default function AboutSection() {
             src="/about-banner.jpg"
             alt="Healthcare team"
             fill
+            sizes="100vw"
             className="object-cover"
           />
         </div>

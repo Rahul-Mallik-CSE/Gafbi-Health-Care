@@ -8,6 +8,7 @@ import ProductSelectionStep from "./ProductSelectionStep";
 import DataEntryStep from "./DataEntryStep";
 import ApplicationStep from "./ApplicationStep";
 import DoneStep from "./DoneStep";
+import Link from "next/link";
 
 const steps = [
   { id: 1, label: "Product Selection" },
@@ -174,7 +175,7 @@ export default function ApplyBoxStepper() {
     <div className="min-h-screen w-full bg-[#d2d9df] pb-8 sm:pb-12">
       <header className="w-full border-b border-gray-200 bg-white">
         <div className="mx-auto flex w-full max-w-full items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
-          <div className="flex items-center gap-2.5">
+          <Link href='/' className="flex items-center gap-2.5">
             <Image
               src="/logo.png"
               alt="Gafbi"
@@ -185,7 +186,7 @@ export default function ApplyBoxStepper() {
             <p className="text-[30px] font-semibold leading-none text-[#1e5a83]">
               Gafbi Health Care
             </p>
-          </div>
+          </Link>
           <p className="hidden text-center text-xs font-semibold text-[#1e5a83] md:block">
             For help with your application, please call:
             <span className="ml-1 text-[#9cbf4b]">030 / 555 785 042</span>

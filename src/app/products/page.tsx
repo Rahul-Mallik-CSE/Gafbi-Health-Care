@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 
-const products = Array.from({ length: 10 }, (_, index) => ({
+const products = Array.from({ length: 9 }, (_, index) => ({
   id: `surface-disinfectant-${index + 1}`,
   name: "Surface Disinfectant",
   size: "500 ml",
@@ -32,7 +32,9 @@ const ProductsPage = () => {
           {products.map((product) => (
             <article
               key={product.id}
-              className="rounded-md bg-white p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.04)]"
+              className="rounded-md bg-white p-3 shadow-[0_0_0_1px_rgba(0,0,0,0.04)] transition-transform duration-200 hover:scale-[1.025] hover:shadow-lg group"
+              tabIndex={0}
+              aria-label={product.name}
             >
               <div className="mb-3 flex h-28 items-end justify-center">
                 <Image
@@ -40,7 +42,8 @@ const ProductsPage = () => {
                   alt={product.name}
                   width={78}
                   height={118}
-                  className="h-auto w-auto"
+                  className="h-auto w-auto select-none pointer-events-none"
+                  draggable={false}
                 />
               </div>
 
@@ -60,13 +63,15 @@ const ProductsPage = () => {
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
-                    className="rounded-sm cursor-pointer border border-(--color-button-bg) px-2 py-0.5 text-base md:text-base font-semibold text-(--color-button-bg)"
+                    className="rounded-sm cursor-pointer border border-(--color-button-bg) px-2 py-0.5 text-base md:text-base font-semibold text-(--color-button-bg) transition-colors duration-150 hover:bg-(--color-button-bg) hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-(--color-button-bg)"
+                    aria-label={`Request booking for ${product.name}`}
                   >
                     Booking request +
                   </button>
                   <Link
                     href={`/products/${product.id}`}
-                    className="rounded-sm cursor-pointer bg-(--color-button-bg) px-2 py-0.75 text-base md:text-base font-semibold text-white"
+                    className="rounded-sm cursor-pointer bg-(--color-button-bg) px-2 py-0.5 text-base md:text-base font-semibold text-white transition-transform duration-150 hover:scale-105 hover:bg-(--color-button-bg) active:scale-95 focus:outline-none focus:ring-2 focus:ring-(--color-button-bg)"
+                    aria-label={`View details for ${product.name}`}
                   >
                     Details
                   </Link>

@@ -32,7 +32,7 @@ export default function NavBar() {
   return (
     <header className="w-full bg-[#f3f3f3]">
       <div className="mx-auto flex w-full max-w-625 items-center justify-between px-6 py-0.5 lg:px-10">
-        <div className="flex items-center gap-4">
+         <Link href='/'className="flex items-center gap-4">
           <Image
             src="/logo.png"
             alt="GAFBI Health Care"
@@ -43,7 +43,7 @@ export default function NavBar() {
           <p className="text-2xl font-semibold leading-none tracking-tight text-primary">
             Gafbi Health Care
           </p>
-        </div>
+        </Link>
 
         <nav className="flex items-center gap-0 overflow-hidden rounded-xl border border-black/10 bg-[#efefef] shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
           {navItems.map((item) => (

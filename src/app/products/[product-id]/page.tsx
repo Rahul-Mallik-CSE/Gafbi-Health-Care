@@ -197,7 +197,7 @@ const ProductDetails = () => {
                   />
                   <button
                     type="button"
-                    className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white"
+                    className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white cursor-pointer"
                   >
                     Submit
                   </button>
