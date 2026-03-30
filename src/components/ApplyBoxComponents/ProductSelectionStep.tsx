@@ -2,9 +2,13 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { LuShoppingBag } from "react-icons/lu";
+import { PiTrashSimple } from "react-icons/pi";
+
+const MAX_ITEMS = 6;
 
 const products = [
   {
@@ -63,6 +67,20 @@ const products = [
     price: 12.99,
     image: "/antifect.png",
   },
+  {
+    id: "9",
+    name: "Surface Disinfectant",
+    volume: "500 ml",
+    price: 12.99,
+    image: "/antifect.png",
+  },
+  {
+    id: "10",
+    name: "Surface Disinfectant",
+    volume: "500 ml",
+    price: 12.99,
+    image: "/antifect.png",
+  },
 ];
 
 interface ProductSelectionStepProps {
@@ -85,31 +103,62 @@ export default function ProductSelectionStep({
     data.length > 0 ? data : [],
   );
 
-  const updateProductQuantity = (productId: string, quantity: number) => {
-    if (quantity === 0) {
-      setSelectedProducts((prev) => prev.filter((p) => p.id !== productId));
+  const totalItems = selectedProducts.reduce((sum, p) => sum + p.quantity, 0);
+  const itemsLeft = Math.max(0, MAX_ITEMS - totalItems);
+
+  const selectedProductsWithImages = useMemo(() => {
+    return selectedProducts.map((selectedProduct) => ({
+      ...selectedProduct,
+      image:
+        products.find((product) => product.id === selectedProduct.id)?.image ||
+        "/antifect.png",
+    }));
+  }, [selectedProducts]);
+
+  const updateProductQuantity = (productId: string, nextQuantity: number) => {
+    if (nextQuantity < 0) return;
+
+    const existing = selectedProducts.find(
+      (product) => product.id === productId,
+    );
+    const currentQty = existing?.quantity || 0;
+    const projectedTotal = totalItems - currentQty + nextQuantity;
+
+    if (projectedTotal > MAX_ITEMS) {
       return;
     }
 
-    const existing = selectedProducts.find((p) => p.id === productId);
-    const product = products.find((p) => p.id === productId);
+    if (nextQuantity === 0) {
+      setSelectedProducts((prev) =>
+        prev.filter((product) => product.id !== productId),
+      );
+      return;
+    }
+
+    const sourceProduct = products.find((product) => product.id === productId);
+    if (!sourceProduct) return;
 
     if (existing) {
       setSelectedProducts((prev) =>
-        prev.map((p) => (p.id === productId ? { ...p, quantity } : p)),
+        prev.map((product) =>
+          product.id === productId
+            ? { ...product, quantity: nextQuantity }
+            : product,
+        ),
       );
-    } else if (product) {
-      setSelectedProducts((prev) => [
-        ...prev,
-        {
-          id: product.id,
-          name: product.name,
-          volume: product.volume,
-          quantity,
-          price: product.price,
-        },
-      ]);
+      return;
     }
+
+    setSelectedProducts((prev) => [
+      ...prev,
+      {
+        id: sourceProduct.id,
+        name: sourceProduct.name,
+        volume: sourceProduct.volume,
+        quantity: nextQuantity,
+        price: sourceProduct.price,
+      },
+    ]);
   };
 
   const handleContinue = () => {
@@ -117,151 +166,169 @@ export default function ProductSelectionStep({
       alert("Please select at least one product");
       return;
     }
+
     onNext({ selectedProducts });
   };
 
-  const totalItems = selectedProducts.reduce((sum, p) => sum + p.quantity, 0);
-
   return (
     <div className="w-full">
-      <h2 className="mb-6 sm:mb-8 text-lg sm:text-2xl font-bold text-primary">
+      <h2 className="mb-6 text-[42px] font-bold text-[#2f2f2f]">
         Choose your products
       </h2>
 
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-6 sm:mb-8">
-        {/* Products Grid */}
-        <div className="lg:col-span-2">
-          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3">
-            {products.map((product) => {
-              const selected = selectedProducts.find(
-                (p) => p.id === product.id,
-              );
-              const quantity = selected?.quantity || 0;
+      <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => {
+            const selected = selectedProducts.find(
+              (item) => item.id === product.id,
+            );
+            const quantity = selected?.quantity || 0;
+            const disableAdd = quantity === 0 && itemsLeft === 0;
 
-              return (
-                <div
-                  key={product.id}
-                  className={`rounded-lg border-2 p-3 sm:p-4 transition-all ${
-                    quantity > 0
-                      ? "border-button-bg bg-white shadow-md"
-                      : "border-gray-200 bg-white"
-                  }`}
-                >
-                  {/* Product Image with Question Mark */}
-                  <div className="relative mb-3 flex h-32 sm:h-40 items-center justify-center rounded-lg bg-gray-50">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={80}
-                      height={120}
-                      className="h-24 sm:h-32 w-auto object-contain"
-                    />
-                    {/* Question Mark Badge */}
-                    <div className="absolute top-2 left-2 flex h-8 w-8 items-center justify-center rounded-full bg-white border-2 border-gray-300 text-center shadow-sm">
-                      <span className="text-xs font-semibold text-gray-500">
-                        ?
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="mb-1 text-xs sm:text-sm font-semibold text-primary">
-                    {product.name}
-                  </h3>
-                  <p className="mb-3 text-xs sm:text-sm text-secondary">
-                    {product.volume}
-                  </p>
+            return (
+              <div
+                key={product.id}
+                className={`rounded-md border bg-[#f3f5f7] p-3 ${
+                  quantity > 0
+                    ? "border-2 border-[#2f73b4]"
+                    : "border border-[#e7eaee]"
+                }`}
+              >
+                <div className="mb-1 flex items-start justify-between">
+                  <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[#9ea7b0] text-xs font-semibold text-[#5f6872]">
+                    ?
+                  </span>
+                </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-sm font-semibold text-secondary">
-                      {quantity}
-                    </span>
-                    <div className="flex gap-1 sm:gap-2">
-                      <button
-                        onClick={() =>
-                          updateProductQuantity(
-                            product.id,
-                            Math.max(0, quantity - 1),
-                          )
-                        }
-                        className="flex cursor-pointer h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                      >
-                        <AiOutlineMinus className="text-xs" />
-                      </button>
-                      <button
-                        onClick={() =>
-                          updateProductQuantity(product.id, quantity + 1)
-                        }
-                        className="flex cursor-pointer h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                      >
-                        <AiOutlinePlus className="text-xs" />
-                      </button>
-                    </div>
+                <div className="mb-2 flex justify-center">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={66}
+                    height={90}
+                    className="h-16.5 w-auto object-contain"
+                  />
+                </div>
+
+                <p className="text-lg font-medium text-[#4a4f54]">
+                  {product.name}
+                </p>
+                <p className="mb-3 text-sm text-[#8a9299]">{product.volume}</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1 text-sm text-[#8a9299]">
+                    <LuShoppingBag className="text-base" />
+                    {quantity}
+                  </span>
+
+                  <div className="flex items-center overflow-hidden rounded-md bg-[#e7eaee]">
+                    <button
+                      onClick={() =>
+                        updateProductQuantity(
+                          product.id,
+                          Math.max(0, quantity - 1),
+                        )
+                      }
+                      className="flex h-8 w-10 cursor-pointer items-center justify-center text-[#6d737a] transition-colors hover:bg-[#d8dde2]"
+                    >
+                      <AiOutlineMinus className="text-xs" />
+                    </button>
+                    <button
+                      onClick={() =>
+                        updateProductQuantity(product.id, quantity + 1)
+                      }
+                      disabled={disableAdd}
+                      className="flex h-8 w-10 cursor-pointer items-center justify-center border-l border-[#d5dce3] text-[#4a4f54] transition-colors hover:bg-[#d8dde2] disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <AiOutlinePlus className="text-xs" />
+                    </button>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* My Care Box Summary */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-4 rounded-lg border border-gray-200 bg-white p-4 sm:p-6">
-            <h3 className="mb-4 text-base sm:text-lg font-bold text-primary">
+        <aside className="rounded-md border border-[#d9dee3] bg-[#f6f7f8]">
+          <div className="border-b border-[#dee3e8] px-4 py-4">
+            <h3 className="text-[34px] font-bold text-[#383d42]">
               My Care Box
             </h3>
-            <div className="mb-4 pb-4 border-b border-gray-200">
-              <p className="text-xs sm:text-sm text-secondary">
-                You can add up to 6 items to your box
-              </p>
+            <div className="mt-3 h-3 overflow-hidden rounded-full bg-[#e0e5ea]">
+              <div
+                className="h-full bg-[#1e5a83] transition-all"
+                style={{ width: `${(totalItems / MAX_ITEMS) * 100}%` }}
+              />
             </div>
+            <p className="mt-2 text-sm font-medium text-[#1e5a83]">
+              {itemsLeft} items left
+            </p>
+          </div>
 
-            <div className="mb-6 space-y-2 max-h-64 overflow-y-auto">
-              {selectedProducts.length === 0 ? (
-                <p className="text-xs sm:text-sm text-gray-400">
-                  No items selected
-                </p>
-              ) : (
-                selectedProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex items-center justify-between text-xs sm:text-sm"
-                  >
-                    <div className="flex-1">
-                      <p className="font-medium text-primary">{product.name}</p>
-                      <p className="text-gray-400">{product.volume}</p>
-                    </div>
-                    <div className="flex items-center gap-2 ml-2">
-                      <span className="font-semibold text-button-bg min-w-6">
-                        {product.quantity}
-                      </span>
-                      <button
-                        onClick={() =>
-                          updateProductQuantity(
-                            product.id,
-                            Math.max(0, product.quantity - 1),
-                          )
-                        }
-                        className="text-red-500 cursor-pointer hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    </div>
+          <div className="max-h-90 space-y-3 overflow-y-auto px-4 py-4">
+            {selectedProductsWithImages.length === 0 ? (
+              <p className="text-sm text-[#8b949e]">No items selected yet</p>
+            ) : (
+              selectedProductsWithImages.map((product) => (
+                <div key={product.id} className="flex items-center gap-3">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={36}
+                    height={48}
+                    className="h-12 w-auto object-contain"
+                  />
+
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium text-[#3f444a]">
+                      {product.name}
+                    </p>
+                    <p className="text-xs text-[#9aa2aa]">{product.volume}</p>
                   </div>
-                ))
-              )}
-            </div>
 
-            <div className="text-center text-xs sm:text-sm font-semibold text-secondary mb-4">
-              {totalItems} items left
-            </div>
+                  <span className="flex items-center gap-1 text-sm text-[#59616a]">
+                    <LuShoppingBag className="text-sm" />
+                    {product.quantity}
+                  </span>
 
+                  <button
+                    onClick={() =>
+                      updateProductQuantity(
+                        product.id,
+                        Math.max(0, product.quantity - 1),
+                      )
+                    }
+                    className="cursor-pointer text-[#ea4f58] transition-colors hover:text-[#cf3640]"
+                    title="Remove one"
+                  >
+                    <PiTrashSimple className="text-base" />
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      updateProductQuantity(product.id, product.quantity + 1)
+                    }
+                    disabled={itemsLeft === 0}
+                    className="rounded bg-[#e7eaee] p-1.5 text-[#4a4f54] transition-colors hover:bg-[#d8dde2] disabled:cursor-not-allowed disabled:opacity-40"
+                    title="Add one"
+                  >
+                    <AiOutlinePlus className="text-xs" />
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="border-t border-[#dee3e8] px-4 py-4">
             <button
               onClick={handleContinue}
-              className="w-full cursor-pointer rounded-md bg-button-bg py-1 sm:py-2 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-opacity"
+              className="ml-auto flex w-full items-center cursor-pointer justify-center gap-2 rounded-md bg-[#1e5a83] px-4 py-2.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
             >
               Continue
+              <span className="text-base">▶</span>
             </button>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );

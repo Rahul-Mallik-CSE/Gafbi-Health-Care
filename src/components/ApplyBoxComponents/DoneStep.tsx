@@ -36,10 +36,10 @@ export default function DoneStep({ onComplete }: DoneStepProps) {
                 Great, that worked!
               </h2>
               <p className="mb-4 text-sm sm:text-base text-secondary leading-relaxed">
-                Thank you for taking the time to complete the application. We'll
-                now forward the application for cost coverage to your long-term
-                care insurance fund and inform you about the status of the
-                processing.
+                Thank you for taking the time to complete the application.
+                We&apos;ll now forward the application for cost coverage to your
+                long-term care insurance fund and inform you about the status of
+                the processing.
               </p>
             </div>
 
@@ -75,7 +75,7 @@ export default function DoneStep({ onComplete }: DoneStepProps) {
               day care facilities).
             </p>
 
-            <div className="flex gap-3">
+            <div className="flex justify-end gap-3">
               <button
                 onClick={() => onComplete()}
                 className="rounded-md cursor-pointer border-2 border-button-bg px-6 sm:px-8 py-1 text-sm sm:text-base font-semibold text-button-bg hover:bg-blue-50 transition-all"

@@ -2,11 +2,14 @@
 
 "use client";
 
+import { MoveLeft, NotebookText, RefreshCw } from "lucide-react";
 import React, { useState, useRef } from "react";
 import { PiWarning } from "react-icons/pi";
 
 interface ApplicationStepProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onNext: (data: any) => void;
   onPrev: () => void;
 }
@@ -31,26 +34,42 @@ export default function ApplicationStep({
     field: string,
     value: string | boolean,
   ) => {
-    setFormData((prev: any) => ({
+    setFormData((prev: typeof formData) => ({
       ...prev,
       [section]: {
-        ...prev[section],
+        ...prev[section as keyof typeof formData],
         [field]: value,
       },
     }));
+  };
+
+  const getCanvasPoint = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
   };
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const point = getCanvasPoint(e);
+    if (!point) return;
+
     setIsDrawing(true);
     ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.moveTo(point.x, point.y);
   };
 
   const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -59,11 +78,13 @@ export default function ApplicationStep({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    const point = getCanvasPoint(e);
+    if (!point) return;
+
+    ctx.lineTo(point.x, point.y);
     ctx.stroke();
   };
 
@@ -72,13 +93,6 @@ export default function ApplicationStep({
     const ctx = canvasRef.current.getContext("2d");
     if (ctx) ctx.closePath();
     setIsDrawing(false);
-  };
-
-  const clearSignature = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
   const resetSignature = () => {
@@ -202,18 +216,18 @@ export default function ApplicationStep({
             opportunity to check everything again.
           </p>
 
-          <div className="mb-4 space-y-2">
+          <div className="mb-4 flex flex-col gap-2">
             <a
               href="#"
-              className="block text-xs sm:text-sm text-button-bg underline"
+              className="inline-flex items-center gap-2 text-xs text-button-bg underline sm:text-sm"
             >
-              ☑ Open application for cost coverage
+              <NotebookText /> Open application for cost coverage
             </a>
             <a
               href="#"
-              className="block text-xs sm:text-sm text-button-bg underline"
+              className="inline-flex items-center gap-2 text-xs text-button-bg underline sm:text-sm"
             >
-              ☑ Open application for a change of supplier
+              <NotebookText /> Open application for a change of supplier
             </a>
           </div>
 
@@ -235,9 +249,9 @@ export default function ApplicationStep({
 
           <button
             onClick={resetSignature}
-            className="mb-4 text-xs sm:text-sm text-button-bg hover:underline"
+            className="mb-4 inline-flex items-center gap-2 text-xs text-button-bg hover:underline sm:text-sm"
           >
-            ↻ Reset
+            <RefreshCw /> Reset
           </button>
 
           {/* Sign checkboxes */}
@@ -294,14 +308,14 @@ export default function ApplicationStep({
         <div className="flex justify-between">
           <button
             onClick={onPrev}
-            className="px-6 py-2 sm:py-3 text-sm font-semibold text-button-bg hover:opacity-80 transition-all"
+            className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
           >
-            ← Previous
+            <MoveLeft /> Previous
           </button>
           <button
             onClick={handleNext}
             disabled={!isFormValid()}
-            className="rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-md bg-button-bg cursor-pointer px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Order Submit application now
           </button>
@@ -310,7 +324,7 @@ export default function ApplicationStep({
 
       {/* Private Insurance Modal */}
       {showPrivateInsuranceModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-50 p-4">
           <div className="w-full max-w-md rounded-lg bg-white p-6 sm:p-8">
             <h3 className="mb-4 text-base font-bold text-primary">
               Important Information

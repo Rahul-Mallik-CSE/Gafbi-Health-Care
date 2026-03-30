@@ -10,9 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { MoveLeft, MoveRight } from "lucide-react";
 
 interface DataEntryStepProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onNext: (data: any) => void;
   onPrev: () => void;
 }
@@ -39,10 +42,10 @@ export default function DataEntryStep({
     field: string,
     value: string | boolean,
   ) => {
-    setFormData((prev: any) => ({
+    setFormData((prev: typeof formData) => ({
       ...prev,
       [section]: {
-        ...prev[section],
+        ...prev[section as keyof typeof formData],
         [field]: value,
       },
     }));
@@ -59,10 +62,13 @@ export default function DataEntryStep({
   const handlePrevSubStep = () => {
     if (currentSubStep > 1) {
       setCurrentSubStep(currentSubStep - 1);
+      return;
     }
+
+    onPrev();
   };
 
-  const handleCreateAccount = (create: boolean) => {
+  const handleCreateAccount = () => {
     setShowAccountModal(false);
     onNext(formData);
   };
@@ -241,7 +247,7 @@ export default function DataEntryStep({
               disabled={!isStep1Valid()}
               className="flex cursor-pointer items-center gap-2 rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next 1/3 <span>→</span>
+              Next 1/3 <MoveRight />
             </button>
           </div>
         </div>
@@ -422,16 +428,19 @@ export default function DataEntryStep({
           <div className="mt-8 flex justify-between">
             <button
               onClick={handlePrevSubStep}
-              className="px-6 cursor-pointer py-2 sm:py-3 text-sm font-semibold text-button-bg hover:opacity-80 transition-all"
+              className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
             >
-              ← Previous
+              <MoveLeft /> Previous
             </button>
             <button
               onClick={handleNext}
               disabled={!isStep2Valid()}
               className="flex cursor-pointer items-center gap-2 rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next 2/3 <span>→</span>
+              Next 2/3{" "}
+              <span>
+                <MoveRight />
+              </span>
             </button>
           </div>
         </div>
@@ -500,7 +509,7 @@ export default function DataEntryStep({
                   onChange={(e) => setConsultationChoice(e.target.value)}
                   className="h-4 w-4"
                 />
-                No, I don't want to be advised.
+                No, I don&apos;t want to be advised.
               </label>
               <label className="flex items-center gap-2 text-sm text-secondary cursor-pointer">
                 <input
@@ -518,7 +527,7 @@ export default function DataEntryStep({
                   placeholder="Tell us why don't you need advice?"
                   value={consultationReason}
                   onChange={(e) => setConsultationReason(e.target.value)}
-                  className="min-h-[90px] w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-button-bg"
+                  className="min-h-22.5 w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-button-bg"
                 />
               )}
             </div>
@@ -544,16 +553,19 @@ export default function DataEntryStep({
           <div className="mt-8 flex justify-between">
             <button
               onClick={handlePrevSubStep}
-              className="px-6 py-2 sm:py-3 cursor-pointer text-sm font-semibold text-button-bg hover:opacity-80 transition-all"
+              className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
             >
-              ← Previous
+              <MoveLeft /> Previous
             </button>
             <button
               onClick={handleNext}
               disabled={!isStep3Valid()}
               className="flex cursor-pointer items-center gap-2 rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next 3/3 <span>→</span>
+              Next 3/3{" "}
+              <span>
+                <MoveRight />
+              </span>
             </button>
           </div>
         </div>
@@ -575,13 +587,13 @@ export default function DataEntryStep({
 
           <div className="space-y-3">
             <button
-              onClick={() => handleCreateAccount(true)}
+              onClick={handleCreateAccount}
               className="w-full cursor-pointer rounded-md bg-button-bg py-2 text-sm font-semibold text-white hover:opacity-90 transition-all"
             >
               Create
             </button>
             <button
-              onClick={() => handleCreateAccount(false)}
+              onClick={handleCreateAccount}
               className="w-full cursor-pointer rounded-md border-2 border-button-bg py-2 text-sm font-semibold text-button-bg hover:bg-blue-50 transition-all"
             >
               Do not manage care box online
