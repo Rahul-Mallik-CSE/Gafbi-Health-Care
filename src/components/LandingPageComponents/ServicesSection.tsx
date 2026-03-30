@@ -20,6 +20,7 @@ export default function ServicesSection() {
             alt=""
             width={325}
             height={325}
+            sizes="(min-width: 768px) 48vw, 100vw"
             className="object-cover rounded-full"
           />
         </div>

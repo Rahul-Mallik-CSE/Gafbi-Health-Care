@@ -5,6 +5,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 declare global {
   interface Window {
@@ -32,6 +33,7 @@ declare global {
 
 export default function InfoNav() {
   const [language, setLanguage] = useState<"en" | "de">("en");
+  const pathname = usePathname();
 
   const setGoogTransCookie = (targetLanguage: "en" | "de") => {
     const value = `/en/${targetLanguage}`;
@@ -83,6 +85,8 @@ export default function InfoNav() {
   useEffect(() => {
     setGoogTransCookie("en");
   }, []);
+
+  if (pathname === "/apply-box") return null;
 
   return (
     <>

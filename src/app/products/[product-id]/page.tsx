@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import { useState } from "react";
 
-const reviewItems = [
+const initialReviews = [
   {
     name: "Alex Morgan",
     time: "1 mo ago",
@@ -32,6 +32,26 @@ const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState<"description" | "reviews">(
     "description",
   );
+  const [reviewItems, setReviewItems] = useState(initialReviews);
+  const [reviewContent, setReviewContent] = useState("");
+  const [reviewName, setReviewName] = useState("");
+  const [reviewEmail, setReviewEmail] = useState("");
+
+  function handleReviewSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!reviewContent.trim() || !reviewName.trim()) return;
+    setReviewItems([
+      {
+        name: reviewName,
+        time: "just now",
+        content: reviewContent,
+      },
+      ...reviewItems,
+    ]);
+    setReviewContent("");
+    setReviewName("");
+    setReviewEmail("");
+  }
 
   return (
     <main className="min-h-screen bg-(--color-card-bg) px-4 pb-12 pt-3 sm:px-6 lg:px-8">
@@ -41,10 +61,7 @@ const ProductDetails = () => {
             Home
           </Link>
           <span className="mx-2">/</span>
-          <Link
-            href="/products"
-            className="hover:text-(--color-button-bg)"
-          >
+          <Link href="/products" className="hover:text-(--color-button-bg)">
             Products
           </Link>
           <span className="mx-2">/</span>
@@ -68,9 +85,7 @@ const ProductDetails = () => {
               <h1 className="mb-1 text-3xl font-semibold text-(--color-primary)">
                 Surface Disinfectant
               </h1>
-              <p className="mb-2 text-base text-(--color-secondary)">
-                500 ml
-              </p>
+              <p className="mb-2 text-base text-(--color-secondary)">500 ml</p>
               <p className="mb-6 flex items-center gap-1 text-base font-semibold text-[#d3a008]">
                 <Star size={14} fill="currentColor" strokeWidth={0} />
                 4.5
@@ -183,24 +198,35 @@ const ProductDetails = () => {
                   <p className="mb-3 text-sm text-(--color-secondary)">
                     Share your thoughts with other customers...
                   </p>
-                  <textarea
-                    className="mb-2 h-20 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
-                    placeholder="Share your thoughts with other customers..."
-                  />
-                  <input
-                    className="mb-2 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
-                    placeholder="Enter your Name"
-                  />
-                  <input
-                    className="mb-3 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
-                    placeholder="Email Address"
-                  />
-                  <button
-                    type="button"
-                    className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white cursor-pointer"
-                  >
-                    Submit
-                  </button>
+                  <form onSubmit={handleReviewSubmit}>
+                    <textarea
+                      className="mb-2 h-20 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
+                      placeholder="Share your thoughts with other customers..."
+                      value={reviewContent}
+                      onChange={(e) => setReviewContent(e.target.value)}
+                      required
+                    />
+                    <input
+                      className="mb-2 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
+                      placeholder="Enter your Name"
+                      value={reviewName}
+                      onChange={(e) => setReviewName(e.target.value)}
+                      required
+                    />
+                    <input
+                      className="mb-3 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
+                      placeholder="Email Address"
+                      value={reviewEmail}
+                      onChange={(e) => setReviewEmail(e.target.value)}
+                      type="email"
+                    />
+                    <button
+                      type="submit"
+                      className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white cursor-pointer transition-colors duration-150 hover:bg-[var(--color-primary)]"
+                    >
+                      Submit
+                    </button>
+                  </form>
                 </div>
               </aside>
 

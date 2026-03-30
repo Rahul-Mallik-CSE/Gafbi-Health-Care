@@ -49,7 +49,7 @@ const FaqsPage = () => {
   return (
     <main className="min-h-screen bg-[#f4f4f4] px-4 pb-12 pt-3 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="mb-6 text-xs text-[var(--color-secondary)]">
+        <div className="mb-6 text-sm text-secondary">
           <span>Home</span>
           <span className="mx-2">/</span>
           <span>FAQs</span>
@@ -88,13 +88,13 @@ const FaqsPage = () => {
                     <h2 className="text-xl font-medium text-[var(--color-primary)]">
                       {faq.question}
                     </h2>
-                    <span className="rounded-md bg-white p-2 text-[var(--color-secondary)]">
+                    <span className="rounded-md bg-white p-2 text-secondary">
                       {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                     </span>
                   </button>
 
                   {isOpen ? (
-                    <p className="mt-3 text-sm leading-7 text-[var(--color-secondary)]">
+                    <p className="mt-3 text-sm leading-7 text-secondary">
                       {faq.answer}
                     </p>
                   ) : null}

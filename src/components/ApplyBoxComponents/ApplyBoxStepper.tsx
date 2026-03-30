@@ -187,7 +187,7 @@ export default function ApplyBoxStepper() {
               Gafbi Health Care
             </p>
           </Link>
-          <p className="hidden text-center text-xs font-semibold text-[#1e5a83] md:block">
+          <p className="hidden text-center text-base font-semibold text-[#1e5a83] md:block">
             For help with your application, please call:
             <span className="ml-1 text-[#9cbf4b]">030 / 555 785 042</span>
           </p>
@@ -256,7 +256,7 @@ export default function ApplyBoxStepper() {
       </div>
 
       <div className="mx-auto mt-6 block w-full max-w-295 px-4 md:hidden">
-        <p className="text-center text-xs font-semibold text-[#1e5a83]">
+        <p className="text-center text-base font-semibold text-[#1e5a83]">
           For help with your application, please call:
           <span className="ml-1 text-[#9cbf4b]">030 / 555 785 042</span>
         </p>

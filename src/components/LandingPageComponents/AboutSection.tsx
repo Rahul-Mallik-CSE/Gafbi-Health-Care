@@ -11,7 +11,7 @@ export default function AboutSection() {
             src="/about-banner.jpg"
             alt="Healthcare team"
             fill
-            sizes="100vw"
+            sizes="(min-width: 768px) 48vw, 100vw"
             className="object-cover"
           />
         </div>
@@ -21,6 +21,7 @@ export default function AboutSection() {
             src="/icons/about_bg.svg"
             alt="Decorative background shape"
             fill
+            sizes="(min-width: 768px) 48vw, 100vw"
             className="object-contain"
           />
         </div>
