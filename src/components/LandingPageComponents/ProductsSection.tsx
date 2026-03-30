@@ -60,7 +60,7 @@ export default function ProductsSection() {
   return (
     <section className="w-full  px-4 py-12 sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto w-full max-w-625 rounded-[14px] bg-card-bg p-5 sm:p-8 lg:p-10 xl:p-16">
-        <h2 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary ">
+        <h2 className="animate-in fade-in slide-in-from-bottom-2 duration-500 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary ">
           Trusted care products from Gafbi
         </h2>
 
@@ -74,7 +74,7 @@ export default function ProductsSection() {
             {products.map((product, productIndex) => (
               <article
                 key={`${product.image}-${productIndex}`}
-                className="w-full shrink-0 rounded-xl bg-background p-4 sm:p-5 md:w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)]"
+                className="group w-full shrink-0 rounded-xl bg-background p-4 sm:p-5 md:w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)] transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="flex h-57.5 items-center justify-center sm:h-75">
                   <Image
@@ -82,7 +82,7 @@ export default function ProductsSection() {
                     alt={product.name}
                     width={240}
                     height={240}
-                    className="h-auto w-auto object-contain"
+                    className="h-auto w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="rounded-xl border border-[#d8dde2]  p-4">
@@ -97,7 +97,7 @@ export default function ProductsSection() {
                     </div>
                     <button
                       type="button"
-                      className="rounded-md cursor-pointer bg-button-bg px-2 py-1 text-sm font-semibold text-white"
+                      className="rounded-md cursor-pointer bg-button-bg px-2 py-1 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0"
                     >
                       + Add to box
                     </button>
@@ -113,7 +113,7 @@ export default function ProductsSection() {
             type="button"
             aria-label="Previous products"
             disabled={!canGoPrev}
-            className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer"
+            className="flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer hover:bg-white/70"
             onClick={handlePrev}
           >
             <MoveLeft
@@ -125,7 +125,7 @@ export default function ProductsSection() {
             type="button"
             aria-label="Next products"
             disabled={!canGoNext}
-            className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer"
+            className="flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer hover:bg-white/70"
             onClick={handleNext}
           >
             <MoveRight

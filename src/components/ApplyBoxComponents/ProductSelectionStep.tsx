@@ -73,6 +73,7 @@ interface ProductSelectionStepProps {
     volume: string;
     price?: number;
   }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onNext: (data: any) => void;
 }
 

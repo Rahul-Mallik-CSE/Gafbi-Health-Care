@@ -24,7 +24,7 @@ export default function ServicesSection() {
           />
         </div>
 
-        <h2 className="relative z-10 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6 md:mb-12">
+        <h2 className="relative z-10 animate-in fade-in slide-in-from-bottom-2 duration-500 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6 md:mb-12">
           Our Services
         </h2>
 
@@ -33,7 +33,7 @@ export default function ServicesSection() {
             return (
               <article
                 key={`${service.title}-${index}`}
-                className={`rounded-xl bg-background p-5 sm:p-6 lg:col-span-2 ${
+                className={`group rounded-xl bg-background p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md lg:col-span-2 ${
                   index === 3
                     ? "lg:col-start-2"
                     : index === 4
@@ -41,7 +41,7 @@ export default function ServicesSection() {
                       : ""
                 }`}
               >
-                <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-xl bg-[#9ad2d3]">
+                <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-xl bg-[#9ad2d3] transition-transform duration-300 group-hover:scale-105">
                   <Image
                     src={service.icon}
                     alt={`${service.title} icon`}
@@ -50,7 +50,7 @@ export default function ServicesSection() {
                     className="h-7.5 w-7.5"
                   />
                 </div>
-                <h3 className="text-base md:text-xl lg:text-2xl font-semibold text-[#1f5f8f]">
+                <h3 className="text-base md:text-xl lg:text-2xl font-semibold text-[#1f5f8f] transition-colors duration-300 group-hover:text-[#174c73]">
                   {service.title}
                 </h3>
               </article>

@@ -44,11 +44,11 @@ export default function CareBoxSection() {
     <section className="w-full  py-10">
       <div className="mx-auto w-full max-w-625 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-210 text-center pb-8 md:pb-20">
-          <h2 className="text-xl font-extrabold leading-tight text-primary sm:text-2xl md:text-3xl lg:text-5xl">
+          <h2 className="animate-in fade-in slide-in-from-bottom-2 duration-500 text-xl font-extrabold leading-tight text-primary sm:text-2xl md:text-3xl lg:text-5xl">
             Free care aids from{" "}
             <span className="text-[#a8c153]">#care level 1</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-150 text-base leading-[1.7] text-secondary sm:text-lg md:text-xl">
+          <p className="animate-in fade-in slide-in-from-bottom-1 delay-100 duration-500 mx-auto mt-4 max-w-150 text-base leading-[1.7] text-secondary sm:text-lg md:text-xl">
             Receive high-quality care products completely free of charge through
             your long-term care insurance. Customize your personal Care Box with
             essential daily aids and have it delivered quickly and easily to
@@ -57,7 +57,7 @@ export default function CareBoxSection() {
           <Link href="/apply-box">
             <button
               type="button"
-              className="mt-7 cursor-pointer rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white hover:opacity-90 transition-opacity"
+              className="mt-7 cursor-pointer rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md active:translate-y-0"
             >
               Apply for a care box now
             </button>
@@ -68,9 +68,9 @@ export default function CareBoxSection() {
           {careBoxFeatures.map((feature) => (
             <article
               key={feature.title}
-              className="rounded-xl bg-[#dfe4e8] p-5 md:p-6 hover:shadow-sm transition-shadow"
+              className="group rounded-xl bg-[#dfe4e8] p-5 md:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4]">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#f4f4f4] transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src={feature.icon}
                   alt={`${feature.title} icon`}
@@ -78,7 +78,7 @@ export default function CareBoxSection() {
                   height={32}
                 />
               </div>
-              <h3 className="text-sm sm:text-base md:text-xl font-bold leading-tight text-primary">
+              <h3 className="text-sm sm:text-base md:text-xl font-bold leading-tight text-primary transition-colors duration-300 group-hover:text-[#1f5f8f]">
                 {feature.title}
               </h3>
               <p className="mt-3 text-xs sm:text-sm md:text-base leading-[1.65] text-secondary">
