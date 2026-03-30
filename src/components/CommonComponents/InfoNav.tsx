@@ -134,14 +134,14 @@ export default function InfoNav() {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="rounded-xl cursor-pointer border border-[#1b4f75] px-4 py-2 text-xs font-semibold text-[#1b4f75]"
+              className="rounded-xl cursor-pointer border border-[#1b4f75] px-4 py-2 text-sm font-semibold text-[#1b4f75]"
             >
               Apply for emergency call support
             </button>
             <Link href="/apply-box">
               <button
                 type="button"
-                className="rounded-xl cursor-pointer bg-[#12456d] px-4 py-2 text-xs font-semibold text-white"
+                className="rounded-xl cursor-pointer bg-[#12456d] px-4 py-2 text-sm font-semibold text-white"
               >
                 Apply for a box
               </button>

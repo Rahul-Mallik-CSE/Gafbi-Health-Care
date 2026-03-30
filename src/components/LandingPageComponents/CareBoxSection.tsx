@@ -44,10 +44,10 @@ const careBoxFeatures = [
 
 export default function CareBoxSection() {
   return (
-    <section className="w-full  pb-14 md:pb-20">
+    <section className="w-full  py-10">
       <div className="mx-auto w-full max-w-625 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-210 text-center">
-          <h2 className="text-xl  font-extrabold leading-tight text-primary sm:text-2xl md:text-3xl lg:text-4xl">
+        <div className="mx-auto max-w-210 text-center pb-8 md:pb-20">
+          <h2 className="text-xl font-extrabold leading-tight text-primary sm:text-2xl md:text-3xl lg:text-5xl">
             Free care aids from{" "}
             <span className="text-[#a8c153]">#care level 1</span>
           </h2>

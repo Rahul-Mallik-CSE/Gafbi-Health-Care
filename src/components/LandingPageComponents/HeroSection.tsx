@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="w-full pb-16">
+   <section className="w-full h-screen pb-16">
       <div className="relative mx-auto w-full max-w-625 overflow-hidden">
-        <div className="relative h-[620px] w-full">
+        <div className="relative h-[calc(100vh-100px)] w-full">
           <Image
             src="/hero-banner.jpg"
             alt="Healthcare professionals"
@@ -34,7 +34,7 @@ export default function HeroSection() {
               <Link href="/apply-box">
                 <button
                   type="button"
-                  className="rounded-sm cursor-pointer bg-button-bg px-5 py-2.5 text-[14px] font-semibold text-white"
+                  className="rounded-sm cursor-pointer bg-button-bg px-5 py-2.5 text-base font-semibold text-white"
                 >
                   Apply for a new care box now
                 </button>
@@ -42,7 +42,7 @@ export default function HeroSection() {
               <Link href="/contact">
                 <button
                   type="button"
-                  className="rounded-sm cursor-pointer bg-[#8d8d8d] px-5 py-2.5 text-[14px] font-semibold text-white"
+                  className="rounded-sm cursor-pointer bg-[#8d8d8d] px-5 py-2.5 text-base font-semibold text-white"
                 >
                   Apply for emergency call support
                 </button>

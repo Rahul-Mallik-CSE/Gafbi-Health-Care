@@ -1,7 +1,7 @@
 /** @format */
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Asap_Condensed, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import InfoNav from "@/components/CommonComponents/InfoNav";
 import NavBar from "@/components/CommonComponents/NavBar";
@@ -9,8 +9,9 @@ import Footer from "@/components/CommonComponents/Footer";
 import FooterBanner from "@/components/LandingPageComponents/FooterBanner";
 import { ToastContainer } from "react-toastify";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const asapCondensed = Asap_Condensed({
+  variable: "--font-asap-condensed",
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
 });
 
@@ -32,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${asapCondensed.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--color-background)] font-sans">
+      <body className="min-h-full flex flex-col bg-(--color-background) overflow-x-hidden">
         <ToastContainer />
         <InfoNav />
         <NavBar />
