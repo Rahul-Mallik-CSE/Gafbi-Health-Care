@@ -31,12 +31,11 @@ const reviews = [
 
 export default function ClientsReviewSection() {
   const [index, setIndex] = useState(0);
+  const maxIndex = Math.max(0, reviews.length - 3);
+  const canGoPrev = index > 0;
+  const canGoNext = index < maxIndex;
 
-  const visible = [
-    reviews[index % reviews.length],
-    reviews[(index + 1) % reviews.length],
-    reviews[(index + 2) % reviews.length],
-  ];
+  const visible = reviews.slice(index, index + 3);
 
   return (
     <section className="w-full  px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
@@ -117,20 +116,30 @@ export default function ClientsReviewSection() {
             <button
               type="button"
               aria-label="Previous reviews"
-              onClick={() =>
-                setIndex((prev) => (prev - 1 + reviews.length) % reviews.length)
-              }
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5d8dc] text-[20px] text-[#8a9097]"
+              onClick={() => canGoPrev && setIndex((prev) => prev - 1)}
+              disabled={!canGoPrev}
+              className="flex h-11 w-11 items-center justify-center rounded-full border text-[20px] transition-colors disabled:cursor-not-allowed disabled:border-[#e5e7eb] disabled:text-[#c4c9cf] hover:cursor-pointer"
             >
-              <MoveLeft className="h-5 w-5" aria-hidden="true" />
+              <MoveLeft
+                className={`h-5 w-5 ${
+                  canGoPrev ? "text-[#1f5f8f]" : "text-[#c4c9cf]"
+                }`}
+                aria-hidden="true"
+              />
             </button>
             <button
               type="button"
               aria-label="Next reviews"
-              onClick={() => setIndex((prev) => (prev + 1) % reviews.length)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5d8dc] text-[20px] text-[#8a9097]"
+              onClick={() => canGoNext && setIndex((prev) => prev + 1)}
+              disabled={!canGoNext}
+              className="flex h-11 w-11 items-center justify-center rounded-full border text-[20px] transition-colors disabled:cursor-not-allowed disabled:border-[#e5e7eb] disabled:text-[#c4c9cf] hover:cursor-pointer"
             >
-              <MoveRight className="h-5 w-5" aria-hidden="true" />
+              <MoveRight
+                className={`h-5 w-5 ${
+                  canGoNext ? "text-[#1f5f8f]" : "text-[#c4c9cf]"
+                }`}
+                aria-hidden="true"
+              />
             </button>
           </div>
         </div>

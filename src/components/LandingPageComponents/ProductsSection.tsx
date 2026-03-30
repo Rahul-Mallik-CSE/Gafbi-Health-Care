@@ -1,6 +1,7 @@
 /** @format */
 "use client";
 import Image from "next/image";
+import { MoveLeft, MoveRight } from "lucide-react";
 import { useMemo, useState } from "react";
 
 const products = [
@@ -43,23 +44,27 @@ export default function ProductsSection() {
   }, []);
 
   const maxIndex = Math.max(0, products.length - visibleCount);
+  const canGoPrev = index > 0;
+  const canGoNext = index < maxIndex;
 
   const handlePrev = () => {
-    setIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+    if (!canGoPrev) return;
+    setIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    if (!canGoNext) return;
+    setIndex((prev) => prev + 1);
   };
 
   return (
-    <section className="w-full  px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section className="w-full  px-4 py-12 sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto w-full max-w-625 rounded-[14px] bg-card-bg p-5 sm:p-8 lg:p-10 xl:p-16">
         <h2 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary ">
           Trusted care products from Gafbi
         </h2>
 
-        <div className="mt-8 overflow-hidden px-2 md:px-4 lg:px-6">
+        <div className="mt-6 md:mt-12 overflow-hidden px-2 md:px-4 lg:px-6">
           <div
             className="flex gap-4 transition-transform duration-300 ease-out"
             style={{
@@ -71,7 +76,7 @@ export default function ProductsSection() {
                 key={`${product.image}-${productIndex}`}
                 className="w-full shrink-0 rounded-xl bg-background p-4 sm:p-5 md:w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)]"
               >
-                <div className="flex h-[230px] items-center justify-center sm:h-[300px]">
+                <div className="flex h-57.5 items-center justify-center sm:h-75">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -103,22 +108,30 @@ export default function ProductsSection() {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-3">
+        <div className="mt-6 md:mt-12 flex items-center justify-center gap-3">
           <button
             type="button"
             aria-label="Previous products"
-            className="flex cursor-pointer h-10 w-10 items-center justify-center rounded-full border border-[#c3c9cf] text-[#95a0aa]"
+            disabled={!canGoPrev}
+            className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer"
             onClick={handlePrev}
           >
-            ←
+            <MoveLeft
+              className={`h-5 w-5 ${canGoPrev ? "text-[#1f5f8f]" : "text-[#c4c9cf]"}`}
+              aria-hidden="true"
+            />
           </button>
           <button
             type="button"
             aria-label="Next products"
-            className="flex cursor-pointer h-10 w-10 items-center justify-center rounded-full border border-[#c3c9cf] text-[#95a0aa]"
+            disabled={!canGoNext}
+            className="flex h-11 w-11 items-center justify-center rounded-full border transition-colors disabled:cursor-not-allowed border-[#D2D2D2] disabled:text-[#c4c9cf] hover:cursor-pointer"
             onClick={handleNext}
           >
-            →
+            <MoveRight
+              className={`h-5 w-5 ${canGoNext ? "text-[#1f5f8f]" : "text-[#c4c9cf]"}`}
+              aria-hidden="true"
+            />
           </button>
         </div>
       </div>
