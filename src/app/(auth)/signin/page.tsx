@@ -1,10 +1,28 @@
 /** @format */
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
-// import { toast } from "react-toastify"; // Uncomment if you want to use toast on this page
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function SignInPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Signed in successfully!");
+      router.push("/");
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#E9EFF3] bg-opacity-80">
       <div className="bg-white rounded-lg shadow-md w-full max-w-md p-8">
@@ -27,18 +45,22 @@ export default function SignInPage() {
           To manage the contents of your Gafbi box and your delivery, please use
           our customer portal.
         </p>
-        <form className="flex flex-col gap-3">
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Email"
             className="border rounded px-3 py-2"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
             className="border rounded px-3 py-2"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="flex justify-end mb-2">
             <Link
@@ -50,9 +72,10 @@ export default function SignInPage() {
           </div>
           <button
             type="submit"
-            className="bg-[#1A4B5A] text-white rounded px-3 py-2 font-semibold"
+            className="bg-[#1A4B5A] hover:bg-[#0c617a] text-white rounded px-3 py-2 font-semibold cursor-pointer"
+            disabled={loading}
           >
-            Log in
+            {loading ? "Signing in..." : "Log in"}
           </button>
         </form>
         <Link
