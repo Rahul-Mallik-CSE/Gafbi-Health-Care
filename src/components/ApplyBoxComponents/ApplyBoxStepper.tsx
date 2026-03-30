@@ -61,46 +61,49 @@ interface FormData {
   };
 }
 
+const getInitialFormData = (): FormData => ({
+  selectedProducts: [],
+  personalDetails: {
+    gender: "",
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    careLevel: "",
+  },
+  address: {
+    street: "",
+    area: "",
+    city: "",
+    zipCode: "",
+    differentDelivery: false,
+    deliveryStreet: "",
+    deliveryArea: "",
+    deliveryCity: "",
+    deliveryZipCode: "",
+  },
+  contact: {
+    email: "",
+    phone: "",
+  },
+  consultation: {
+    needsConsultation: false,
+    consultationReason: "",
+    alreadyHasAids: false,
+  },
+  insurance: {
+    type: "",
+    number: "",
+  },
+  applicationSign: {
+    hasSignedCost: false,
+    hasSignedSupplier: false,
+  },
+});
+
 export default function ApplyBoxStepper() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    selectedProducts: [],
-    personalDetails: {
-      gender: "",
-      firstName: "",
-      lastName: "",
-      dateOfBirth: "",
-      careLevel: "",
-    },
-    address: {
-      street: "",
-      area: "",
-      city: "",
-      zipCode: "",
-      differentDelivery: false,
-      deliveryStreet: "",
-      deliveryArea: "",
-      deliveryCity: "",
-      deliveryZipCode: "",
-    },
-    contact: {
-      email: "",
-      phone: "",
-    },
-    consultation: {
-      needsConsultation: false,
-      consultationReason: "",
-      alreadyHasAids: false,
-    },
-    insurance: {
-      type: "",
-      number: "",
-    },
-    applicationSign: {
-      hasSignedCost: false,
-      hasSignedSupplier: false,
-    },
-  });
+  const [formData, setFormData] = useState<FormData>(getInitialFormData);
+  const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
 
   const handleNext = (updatedData?: Partial<FormData>) => {
     if (updatedData) {
@@ -120,6 +123,13 @@ export default function ApplyBoxStepper() {
 
   const handleComplete = () => {
     console.log("Application completed with data:", formData);
+    setIsApplicationCompleted(true);
+  };
+
+  const handleStartNewApplication = () => {
+    setFormData(getInitialFormData());
+    setCurrentStep(1);
+    setIsApplicationCompleted(false);
   };
 
   const getStepState = (stepId: number) => {
@@ -219,7 +229,29 @@ export default function ApplyBoxStepper() {
           </div>
         </div>
 
-        <div className="mx-auto w-full">{renderStep()}</div>
+        <div className="mx-auto w-full">
+          {isApplicationCompleted ? (
+            <div className="rounded-lg border border-gray-200 bg-white p-6 sm:p-10">
+              <h3 className="text-2xl font-bold text-primary">
+                Application submitted successfully
+              </h3>
+              <p className="mt-3 text-sm text-secondary">
+                Thank you. Your application has been received and will be
+                processed shortly.
+              </p>
+              <div className="mt-6">
+                <button
+                  onClick={handleStartNewApplication}
+                  className="rounded-md bg-button-bg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
+                >
+                  Start a new application
+                </button>
+              </div>
+            </div>
+          ) : (
+            renderStep()
+          )}
+        </div>
       </div>
 
       <div className="mx-auto mt-6 block w-full max-w-295 px-4 md:hidden">

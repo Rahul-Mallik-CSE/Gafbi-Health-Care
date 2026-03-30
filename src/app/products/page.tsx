@@ -14,17 +14,17 @@ const products = Array.from({ length: 10 }, (_, index) => ({
 
 const ProductsPage = () => {
   return (
-    <main className="min-h-screen bg-[var(--color-card-bg)] px-4 pb-12 pt-3 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-(--color-card-bg) px-4 pb-12 pt-3 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="mb-6 text-xs text-[var(--color-secondary)]">
+        <div className="mb-6 text-base text-(--color-secondary)">
           <span>Home</span>
           <span className="mx-2">/</span>
           <span>Products</span>
           <span className="mx-2">/</span>
-          <span className="text-[var(--color-button-bg)]">Our products</span>
+          <span className="text-(--color-button-bg)">Our products</span>
         </div>
 
-        <h1 className="mb-4 text-3xl font-semibold text-[var(--color-primary)]">
+        <h1 className="mb-4 text-3xl font-semibold text-(--color-primary)">
           Our Products
         </h1>
 
@@ -44,15 +44,15 @@ const ProductsPage = () => {
                 />
               </div>
 
-              <h2 className="mb-1 text-sm md:text-base font-medium text-[var(--color-primary)]">
+              <h2 className="mb-1 text-base md:text-base font-medium text-(--color-primary)">
                 {product.name}
               </h2>
-              <p className="mb-2 text-xs md:text-sm text-[var(--color-secondary)]">
+              <p className="mb-2 text-base md:text-base text-(--color-secondary)">
                 {product.size}
               </p>
 
               <div className="flex items-center justify-between gap-2">
-                <p className="flex items-center gap-1 text-xs md:text-sm font-semibold text-[#d3a008]">
+                <p className="flex items-center gap-1 text-base md:text-base font-semibold text-[#d3a008]">
                   <Star size={12} fill="currentColor" strokeWidth={0} />
                   {product.rating}
                 </p>
@@ -60,13 +60,13 @@ const ProductsPage = () => {
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
-                    className="rounded-sm cursor-pointer border border-[var(--color-button-bg)] px-2 py-[2px] text-xs md:text-sm font-semibold text-[var(--color-button-bg)]"
+                    className="rounded-sm cursor-pointer border border-(--color-button-bg) px-2 py-0.5 text-base md:text-base font-semibold text-(--color-button-bg)"
                   >
                     Booking request +
                   </button>
                   <Link
                     href={`/products/${product.id}`}
-                    className="rounded-sm cursor-pointer bg-[var(--color-button-bg)] px-2 py-[3px] text-xs md:text-sm font-semibold text-white"
+                    className="rounded-sm cursor-pointer bg-(--color-button-bg) px-2 py-0.75 text-base md:text-base font-semibold text-white"
                   >
                     Details
                   </Link>

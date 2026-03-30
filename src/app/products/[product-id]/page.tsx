@@ -34,23 +34,23 @@ const ProductDetails = () => {
   );
 
   return (
-    <main className="min-h-screen bg-[var(--color-card-bg)] px-4 pb-12 pt-3 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-(--color-card-bg) px-4 pb-12 pt-3 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="mb-6 text-xs text-[var(--color-secondary)]">
-          <Link href="/" className="hover:text-[var(--color-button-bg)]">
+        <div className="mb-6 text-sm text-(--color-secondary)">
+          <Link href="/" className="hover:text-(--color-button-bg)">
             Home
           </Link>
           <span className="mx-2">/</span>
           <Link
             href="/products"
-            className="hover:text-[var(--color-button-bg)]"
+            className="hover:text-(--color-button-bg)"
           >
             Products
           </Link>
           <span className="mx-2">/</span>
           <span>Our products</span>
           <span className="mx-2">/</span>
-          <span className="text-[var(--color-button-bg)]">Product details</span>
+          <span className="text-(--color-button-bg)">Product details</span>
         </div>
 
         <section className="rounded-md bg-white p-4 sm:p-6">
@@ -65,34 +65,34 @@ const ProductDetails = () => {
             </div>
 
             <div>
-              <h1 className="mb-1 text-3xl font-semibold text-[var(--color-primary)]">
+              <h1 className="mb-1 text-3xl font-semibold text-(--color-primary)">
                 Surface Disinfectant
               </h1>
-              <p className="mb-2 text-sm text-[var(--color-secondary)]">
+              <p className="mb-2 text-base text-(--color-secondary)">
                 500 ml
               </p>
-              <p className="mb-6 flex items-center gap-1 text-sm font-semibold text-[#d3a008]">
+              <p className="mb-6 flex items-center gap-1 text-base font-semibold text-[#d3a008]">
                 <Star size={14} fill="currentColor" strokeWidth={0} />
                 4.5
               </p>
 
               <button
                 type="button"
-                className="rounded-md bg-[var(--color-button-bg)] px-5 py-2 text-sm font-semibold text-white"
+                className="rounded-md bg-(--color-button-bg) px-5 py-2 text-base font-semibold text-white cursor-pointer"
               >
                 Booking request +
               </button>
             </div>
           </div>
 
-          <div className="mb-5 flex border-b border-slate-300 text-sm">
+          <div className="mb-5 flex border-b border-slate-300 text-base">
             <button
               type="button"
               onClick={() => setActiveTab("description")}
-              className={`border-b-2 px-1 pb-2 pr-4 font-semibold ${
+              className={`border-b-2 px-1 pb-2 pr-4 font-semibold cursor-pointer ${
                 activeTab === "description"
-                  ? "border-[var(--color-button-bg)] text-[var(--color-button-bg)]"
-                  : "border-transparent text-[var(--color-secondary)]"
+                  ? "border-(--color-button-bg) text-(--color-button-bg)"
+                  : "border-transparent text-(--color-secondary)"
               }`}
             >
               Description
@@ -100,10 +100,10 @@ const ProductDetails = () => {
             <button
               type="button"
               onClick={() => setActiveTab("reviews")}
-              className={`border-b-2 px-1 pb-2 font-semibold ${
+              className={`border-b-2 px-1 pb-2 font-semibold cursor-pointer ${
                 activeTab === "reviews"
-                  ? "border-[var(--color-button-bg)] text-[var(--color-button-bg)]"
-                  : "border-transparent text-[var(--color-secondary)]"
+                  ? "border-(--color-button-bg) text-(--color-button-bg)"
+                  : "border-transparent text-(--color-secondary)"
               }`}
             >
               Reviews & ratings
@@ -111,7 +111,7 @@ const ProductDetails = () => {
           </div>
 
           {activeTab === "description" ? (
-            <div className="space-y-1 text-sm leading-7 text-[var(--color-primary)]">
+            <div className="space-y-1 text-base leading-7 text-(--color-primary)">
               <p>
                 Dr. Schumacher - Aseptoman Med - alcoholic hand disinfectant
                 wipes - 15 pcs.
@@ -155,16 +155,16 @@ const ProductDetails = () => {
           ) : (
             <div className="grid gap-6 lg:grid-cols-[250px_1fr]">
               <aside>
-                <h2 className="mb-5 text-xl font-semibold text-[var(--color-primary)]">
+                <h2 className="mb-5 text-xl font-semibold text-(--color-primary)">
                   4.6
                 </h2>
-                <p className="mb-2 text-sm text-[var(--color-primary)]">
+                <p className="mb-2 text-base text-(--color-primary)">
                   634 product ratings
                 </p>
                 {[5, 4, 3, 2, 1].map((star, index) => (
                   <div
                     key={star}
-                    className="mb-2 flex items-center gap-2 text-xs"
+                    className="mb-2 flex items-center gap-2 text-sm"
                   >
                     <span className="w-4">{star}</span>
                     <div className="h-1.5 w-full rounded bg-slate-200">
@@ -177,27 +177,27 @@ const ProductDetails = () => {
                 ))}
 
                 <div className="mt-8">
-                  <h3 className="mb-2 text-lg font-semibold text-[var(--color-primary)]">
+                  <h3 className="mb-2 text-lg font-semibold text-(--color-primary)">
                     Review this product
                   </h3>
-                  <p className="mb-3 text-xs text-[var(--color-secondary)]">
+                  <p className="mb-3 text-sm text-(--color-secondary)">
                     Share your thoughts with other customers...
                   </p>
                   <textarea
-                    className="mb-2 h-20 w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none"
+                    className="mb-2 h-20 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
                     placeholder="Share your thoughts with other customers..."
                   />
                   <input
-                    className="mb-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none"
+                    className="mb-2 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
                     placeholder="Enter your Name"
                   />
                   <input
-                    className="mb-3 w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none"
+                    className="mb-3 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
                     placeholder="Email Address"
                   />
                   <button
                     type="button"
-                    className="rounded-md bg-[var(--color-button-bg)] px-4 py-1.5 text-sm font-semibold text-white"
+                    className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white"
                   >
                     Submit
                   </button>
@@ -205,7 +205,7 @@ const ProductDetails = () => {
               </aside>
 
               <section>
-                <h2 className="mb-4 text-lg font-semibold text-[var(--color-primary)]">
+                <h2 className="mb-4 text-lg font-semibold text-(--color-primary)">
                   Most relevant reviews
                 </h2>
                 <div className="space-y-5">
@@ -215,10 +215,10 @@ const ProductDetails = () => {
                       className="border-b border-slate-200 pb-4"
                     >
                       <div className="mb-2 flex items-center justify-between">
-                        <p className="text-sm font-semibold text-[var(--color-primary)]">
+                        <p className="text-base font-semibold text-(--color-primary)">
                           {item.name}
                         </p>
-                        <p className="text-xs text-[var(--color-secondary)]">
+                        <p className="text-sm text-(--color-secondary)">
                           {item.time}
                         </p>
                       </div>
@@ -232,7 +232,7 @@ const ProductDetails = () => {
                           />
                         ))}
                       </p>
-                      <p className="text-sm leading-6 text-[var(--color-primary)]">
+                      <p className="text-base leading-6 text-(--color-primary)">
                         {item.content}
                       </p>
                     </article>
