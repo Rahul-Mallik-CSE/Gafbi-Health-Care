@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { MoveLeft, MoveRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface DataEntryStepProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +26,7 @@ export default function DataEntryStep({
   onNext,
   onPrev,
 }: DataEntryStepProps) {
+  const { t } = useTranslation();
   const [showAccountModal, setShowAccountModal] = useState(false);
   const [formData, setFormData] = useState({
     personalDetails: data.personalDetails,
@@ -104,7 +106,7 @@ export default function DataEntryStep({
   return (
     <div className="w-full max-w-4xl mx-auto">
       <h2 className="mb-6 sm:mb-8 text-lg sm:text-2xl font-bold text-primary">
-        Data of the person to be cared for
+        {t("apply.dataEntry")}
       </h2>
 
       {/* Step 1: Personal Details */}
@@ -430,14 +432,14 @@ export default function DataEntryStep({
               onClick={handlePrevSubStep}
               className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
             >
-              <MoveLeft /> Previous
+              <MoveLeft /> {t("common.previous")}
             </button>
             <button
               onClick={handleNext}
               disabled={!isStep2Valid()}
               className="flex cursor-pointer items-center gap-2 rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next 2/3{" "}
+              {t("common.next")} 2/3{" "}
               <span>
                 <MoveRight />
               </span>
@@ -555,14 +557,14 @@ export default function DataEntryStep({
               onClick={handlePrevSubStep}
               className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
             >
-              <MoveLeft /> Previous
+              <MoveLeft /> {t("common.previous")}
             </button>
             <button
               onClick={handleNext}
               disabled={!isStep3Valid()}
               className="flex cursor-pointer items-center gap-2 rounded-md bg-button-bg px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next 3/3{" "}
+              {t("common.next")} 3/3{" "}
               <span>
                 <MoveRight />
               </span>

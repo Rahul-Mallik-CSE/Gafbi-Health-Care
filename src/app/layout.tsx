@@ -8,6 +8,7 @@ import NavBar from "@/components/CommonComponents/NavBar";
 import Footer from "@/components/CommonComponents/Footer";
 import FooterBanner from "@/components/LandingPageComponents/FooterBanner";
 import { ToastContainer } from "react-toastify";
+import I18nProvider from "@/components/CommonComponents/I18nProvider";
 
 const asapCondensed = Asap_Condensed({
   variable: "--font-asap-condensed",
@@ -74,13 +75,15 @@ export default function RootLayout({
       className={`${asapCondensed.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[--color-background] overflow-x-hidden">
-        <ToastContainer />
-        <InfoNav />
-        <NavBar />
+        <I18nProvider>
+          <ToastContainer />
+          <InfoNav />
+          <NavBar />
 
-        {children}
-        <FooterBanner />
-        <Footer />
+          {children}
+          <FooterBanner />
+          <Footer />
+        </I18nProvider>
       </body>
     </html>
   );

@@ -1,13 +1,15 @@
 /** @format */
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function SignInPage() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function SignInPage() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      toast.success("Signed in successfully!");
+      toast.success(t("toasts.signedIn"));
       router.push("/");
     }, 1000);
   };
@@ -39,11 +41,10 @@ export default function SignInPage() {
           </h1>
         </div>
         <h2 className="text-lg font-bold text-[#1A4B5A] mb-1">
-          Log in & manage Gafbi-Box
+          {t("auth.loginManage")}
         </h2>
         <p className="text-gray-700 mb-4 text-sm">
-          To manage the contents of your Gafbi box and your delivery, please use
-          our customer portal.
+          {t("auth.loginDescription")}
         </p>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <input
@@ -67,7 +68,7 @@ export default function SignInPage() {
               href="/forgot-password"
               className="text-xs text-[#1A4B5A] font-semibold hover:underline"
             >
-              Forgot password?
+              {t("auth.forgotPassword")}
             </Link>
           </div>
           <button
@@ -75,14 +76,14 @@ export default function SignInPage() {
             className="bg-[#1A4B5A] hover:bg-[#0c617a] text-white rounded px-3 py-2 font-semibold cursor-pointer"
             disabled={loading}
           >
-            {loading ? "Signing in..." : "Log in"}
+            {loading ? t("auth.signingIn") : t("auth.login")}
           </button>
         </form>
         <Link
           href="/register"
           className="block mt-4 border border-[#1A4B5A] text-[#1A4B5A] rounded px-3 py-2 text-center font-semibold hover:bg-[#1A4B5A] hover:text-white transition"
         >
-          Create a new account
+          {t("auth.createAccount")}
         </Link>
       </div>
     </div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const initialReviews = [
   {
@@ -29,6 +30,7 @@ const initialReviews = [
 ];
 
 const ProductDetails = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"description" | "reviews">(
     "description",
   );
@@ -58,16 +60,18 @@ const ProductDetails = () => {
       <div className="mx-auto w-full max-w-7xl">
         <div className="mb-6 text-sm text-(--color-secondary)">
           <Link href="/" className="hover:text-(--color-button-bg)">
-            Home
+            {t("common.home")}
           </Link>
           <span className="mx-2">/</span>
           <Link href="/products" className="hover:text-(--color-button-bg)">
-            Products
+            {t("common.products")}
           </Link>
           <span className="mx-2">/</span>
-          <span>Our products</span>
+          <span>{t("productsPage.breadcrumbLabel")}</span>
           <span className="mx-2">/</span>
-          <span className="text-(--color-button-bg)">Product details</span>
+          <span className="text-(--color-button-bg)">
+            {t("productsPage.productDetails")}
+          </span>
         </div>
 
         <section className="rounded-md bg-white p-4 sm:p-6">
@@ -95,7 +99,7 @@ const ProductDetails = () => {
                 type="button"
                 className="rounded-md bg-(--color-button-bg) px-5 py-2 text-base font-semibold text-white cursor-pointer"
               >
-                Booking request +
+                {t("productsPage.bookingRequest")}
               </button>
             </div>
           </div>
@@ -110,7 +114,7 @@ const ProductDetails = () => {
                   : "border-transparent text-(--color-secondary)"
               }`}
             >
-              Description
+              {t("productsPage.descriptionTab")}
             </button>
             <button
               type="button"
@@ -121,7 +125,7 @@ const ProductDetails = () => {
                   : "border-transparent text-(--color-secondary)"
               }`}
             >
-              Reviews & ratings
+              {t("productsPage.reviewsTab")}
             </button>
           </div>
 
@@ -193,15 +197,15 @@ const ProductDetails = () => {
 
                 <div className="mt-8">
                   <h3 className="mb-2 text-lg font-semibold text-(--color-primary)">
-                    Review this product
+                    {t("productsPage.reviewProduct")}
                   </h3>
                   <p className="mb-3 text-sm text-(--color-secondary)">
-                    Share your thoughts with other customers...
+                    {t("productsPage.shareThoughts")}
                   </p>
                   <form onSubmit={handleReviewSubmit}>
                     <textarea
                       className="mb-2 h-20 w-full rounded-md border border-slate-300 px-3 py-2 text-base outline-none"
-                      placeholder="Share your thoughts with other customers..."
+                      placeholder={t("productsPage.shareThoughts")}
                       value={reviewContent}
                       onChange={(e) => setReviewContent(e.target.value)}
                       required
@@ -224,7 +228,7 @@ const ProductDetails = () => {
                       type="submit"
                       className="rounded-md bg-(--color-button-bg) px-4 py-1.5 text-base font-semibold text-white cursor-pointer transition-colors duration-150 hover:bg-[var(--color-primary)]"
                     >
-                      Submit
+                      {t("common.submit")}
                     </button>
                   </form>
                 </div>
@@ -232,7 +236,7 @@ const ProductDetails = () => {
 
               <section>
                 <h2 className="mb-4 text-lg font-semibold text-(--color-primary)">
-                  Most relevant reviews
+                  {t("productsPage.mostRelevant")}
                 </h2>
                 <div className="space-y-5">
                   {reviewItems.map((item, idx) => (

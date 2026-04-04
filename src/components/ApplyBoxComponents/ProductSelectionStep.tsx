@@ -7,6 +7,7 @@ import Image from "next/image";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { LuShoppingBag } from "react-icons/lu";
 import { PiTrashSimple } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 const MAX_ITEMS = 6;
 
@@ -99,6 +100,7 @@ export default function ProductSelectionStep({
   data,
   onNext,
 }: ProductSelectionStepProps) {
+  const { t } = useTranslation();
   const [selectedProducts, setSelectedProducts] = useState(
     data.length > 0 ? data : [],
   );
@@ -173,7 +175,7 @@ export default function ProductSelectionStep({
   return (
     <div className="w-full">
       <h2 className="mb-6 text-[42px] font-bold text-[#2f2f2f]">
-        Choose your products
+        {t("apply.chooseProducts")}
       </h2>
 
       <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
@@ -252,7 +254,7 @@ export default function ProductSelectionStep({
         <aside className="rounded-md border border-[#d9dee3] bg-[#f6f7f8]">
           <div className="border-b border-[#dee3e8] px-4 py-4">
             <h3 className="text-[34px] font-bold text-[#383d42]">
-              My Care Box
+              {t("apply.myCareBox")}
             </h3>
             <div className="mt-3 h-3 overflow-hidden rounded-full bg-[#e0e5ea]">
               <div
@@ -261,13 +263,13 @@ export default function ProductSelectionStep({
               />
             </div>
             <p className="mt-2 text-sm font-medium text-[#1e5a83]">
-              {itemsLeft} items left
+              {t("apply.itemsLeft", { count: itemsLeft })}
             </p>
           </div>
 
           <div className="max-h-90 space-y-3 overflow-y-auto px-4 py-4">
             {selectedProductsWithImages.length === 0 ? (
-              <p className="text-sm text-[#8b949e]">No items selected yet</p>
+              <p className="text-sm text-[#8b949e]">{t("apply.noItems")}</p>
             ) : (
               selectedProductsWithImages.map((product) => (
                 <div key={product.id} className="flex items-center gap-3">
@@ -324,7 +326,7 @@ export default function ProductSelectionStep({
               onClick={handleContinue}
               className="ml-auto flex w-full items-center cursor-pointer justify-center gap-2 rounded-md bg-[#1e5a83] px-4 py-2.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Continue
+              {t("apply.continue")}
               <span className="text-base">▶</span>
             </button>
           </div>

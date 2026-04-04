@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function VerifyOtpPage() {
+  const { t } = useTranslation();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -26,13 +28,13 @@ export default function VerifyOtpPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (otp.join("").length !== 4) {
-      toast.error("Please enter the 4-digit OTP");
+      toast.error(t("toasts.otpRequired"));
       return;
     }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      toast.success("OTP verified! Please sign in.");
+      toast.success(t("toasts.otpVerified"));
       router.push("/signin");
     }, 1200);
   };
@@ -52,9 +54,11 @@ export default function VerifyOtpPage() {
             Gafbi Health Care
           </h1>
         </div>
-        <h2 className="text-lg font-bold text-[#1A4B5A] mb-1">Verify OTP</h2>
+        <h2 className="text-lg font-bold text-[#1A4B5A] mb-1">
+          {t("auth.verifyTitle")}
+        </h2>
         <p className="text-gray-700 mb-4 text-sm">
-          Enter the 4-digit OTP sent to your email.
+          {t("auth.verifyDescription")}
         </p>
         <form
           className="flex flex-col gap-3 items-center"
@@ -79,7 +83,7 @@ export default function VerifyOtpPage() {
             className="bg-[#1A4B5A] text-white rounded px-3 py-2 font-semibold cursor-pointer"
             disabled={loading}
           >
-            {loading ? "Verifying..." : "Verify"}
+            {loading ? t("auth.verifying") : t("auth.verify")}
           </button>
         </form>
       </div>

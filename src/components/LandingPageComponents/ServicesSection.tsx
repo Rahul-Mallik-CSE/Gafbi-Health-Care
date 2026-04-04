@@ -1,6 +1,9 @@
 /** @format */
 
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const services = [
   { title: "Care Application", icon: "/icons/s1.svg" },
@@ -11,6 +14,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full px-4 py-12 sm:px-6 lg:px-8 lg:pb-20">
       <div className="relative mx-auto w-full max-w-625 overflow-hidden rounded-[14px] bg-card-bg p-6 sm:p-8 lg:p-16">
@@ -26,7 +31,7 @@ export default function ServicesSection() {
         </div>
 
         <h2 className="relative z-10 animate-in fade-in slide-in-from-bottom-2 duration-500 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-6 md:mb-12">
-          Our Services
+          {t("landing.servicesTitle")}
         </h2>
 
         <div className="relative z-10 mx-auto mt-8 grid max-w-300 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">

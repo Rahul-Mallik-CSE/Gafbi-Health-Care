@@ -4,12 +4,14 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface DoneStepProps {
   onComplete: () => void;
 }
 
 export default function DoneStep({ onComplete }: DoneStepProps) {
+  const { t } = useTranslation();
   const [currentSubStep, setCurrentSubStep] = useState(1);
   const [satisfaction, setSatisfaction] = useState("");
   const [informationSatisfaction, setInformationSatisfaction] = useState("");
@@ -80,7 +82,7 @@ export default function DoneStep({ onComplete }: DoneStepProps) {
                 onClick={() => onComplete()}
                 className="rounded-md cursor-pointer border-2 border-button-bg px-6 sm:px-8 py-1 text-sm sm:text-base font-semibold text-button-bg hover:bg-blue-50 transition-all"
               >
-                Skip now
+                {t("common.previous")}
               </button>
               <button
                 onClick={handleContinue}
@@ -132,7 +134,7 @@ export default function DoneStep({ onComplete }: DoneStepProps) {
             disabled={!satisfaction}
             className="rounded-md cursor-pointer bg-button-bg px-8 py-2 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Continue
+            {t("common.next")}
           </button>
         </div>
       )}
@@ -170,7 +172,7 @@ export default function DoneStep({ onComplete }: DoneStepProps) {
             disabled={!informationSatisfaction}
             className="rounded-md cursor-pointer bg-button-bg px-8 py-2  text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Done
+            {t("common.done")}
           </button>
         </div>
       )}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { MoveLeft, NotebookText, RefreshCw } from "lucide-react";
 import React, { useState, useRef } from "react";
 import { PiWarning } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 interface ApplicationStepProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,6 +21,7 @@ export default function ApplicationStep({
   onNext,
   onPrev,
 }: ApplicationStepProps) {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [formData, setFormData] = useState({
     consultation: data.consultation,
@@ -125,7 +127,7 @@ export default function ApplicationStep({
   return (
     <div className="w-full">
       <h2 className="mb-6 sm:mb-8 text-lg sm:text-2xl font-bold text-primary">
-        Application for the care box
+        {t("apply.application")}
       </h2>
 
       <div className="rounded-lg border border-gray-200 bg-white p-4 sm:p-8">
@@ -178,10 +180,10 @@ export default function ApplicationStep({
               Health or long-term care insurance
             </label>
             <select
-              value=""
+              defaultValue=""
               className="w-full rounded-md border border-gray-300 px-4 py-2 sm:py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-button-bg"
             >
-              <option>Select insurance provider</option>
+              <option value="">Select insurance provider</option>
             </select>
           </div>
 
@@ -207,7 +209,13 @@ export default function ApplicationStep({
               onClick={() => setShowInsuranceTipModal(true)}
               className="mb-2 inline-flex items-center text-xs text-yellow-600 underline cursor-pointer sm:text-sm mt-1 gap-1"
             >
-             <Image src='/icons/Lightbulb.svg' alt='tips' width={20} height={20} /> Tip: Find insurance number
+              <Image
+                src="/icons/Lightbulb.svg"
+                alt="tips"
+                width={20}
+                height={20}
+              />{" "}
+              Tip: Find insurance number
             </button>
           </div>
         </div>
@@ -316,14 +324,14 @@ export default function ApplicationStep({
             onClick={onPrev}
             className="flex cursor-pointer items-center gap-2 px-6 py-2 text-sm font-semibold text-button-bg transition-all hover:opacity-80 sm:py-3"
           >
-            <MoveLeft /> Previous
+            <MoveLeft /> {t("common.previous")}
           </button>
           <button
             onClick={handleNext}
             disabled={!isFormValid()}
             className="rounded-md bg-button-bg cursor-pointer px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Order Submit application now
+            {t("common.submit")}
           </button>
         </div>
       </div>

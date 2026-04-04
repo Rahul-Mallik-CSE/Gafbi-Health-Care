@@ -1,19 +1,28 @@
 /** @format */
 
+"use client";
+
 import Image from "next/image";
-
-const quickLinks = [
-  "Apply for a care box",
-  "Apply for emergency call support (home)",
-  "Apply for a care level",
-  "Care level upgrade",
-];
-
-const companyLinks = ["Frequently Asked Questions", "Contact", "About Us"];
+import { useTranslation } from "react-i18next";
 
 const findUsLinks = ["Facebook", "Instagram", "LinkedIn", "Youtube"];
 
 export default function Footer() {
+  const { t } = useTranslation();
+
+  const quickLinks = [
+    t("infoNav.applyBox"),
+    t("infoNav.emergencySupport"),
+    t("apply.application"),
+    t("apply.dataEntry"),
+  ];
+
+  const companyLinks = [
+    t("common.faqs"),
+    t("common.contact"),
+    t("nav.aboutUs"),
+  ];
+
   return (
     <footer className="w-full mx-auto bg-[#f3f3f3]">
       <div className="w-full mx-auto max-w-625">
@@ -21,12 +30,12 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-between gap-8">
             <div className="max-w-80">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold leading-tight text-[#13161a]">
-                Stay in the loop with our latest listings
+                {t("footer.newsletter")}
               </h2>
               <div className="mt-5 flex overflow-hidden rounded-md border border-[#d3d7dc] bg-white">
                 <input
                   type="email"
-                  placeholder="Enter email to subscribe"
+                  placeholder={t("footer.subscribePlaceholder")}
                   className="w-full px-4 py-2 text-[18px] text-[#4e5760] outline-none"
                 />
                 <button
@@ -57,7 +66,7 @@ export default function Footer() {
           <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3">
             <div>
               <h3 className="text-sm md:text-base lg:text-lg font-semibold text-[#1b1f24]">
-                Quick links
+                {t("footer.quickLinks")}
               </h3>
               <ul className="mt-4 space-y-2">
                 {quickLinks.map((link) => (
@@ -75,7 +84,7 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm md:text-base lg:text-lg font-semibold text-[#1b1f24]">
-                Company
+                {t("footer.company")}
               </h3>
               <ul className="mt-4 space-y-2">
                 {companyLinks.map((link) => (
@@ -99,7 +108,7 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm md:text-base lg:text-lg font-semibold text-[#1b1f24]">
-                Find us
+                {t("footer.findUs")}
               </h3>
               <ul className="mt-4 space-y-2">
                 {findUsLinks.map((link) => (
@@ -121,18 +130,16 @@ export default function Footer() {
       <div className="border-t border-[#d9dde1]">
         <div className="max-w-625 mx-auto ">
           <div className="mx-auto w-full flex justify-between max-w-625 px-4 py-4  sm:px-6 md:mx-16 lg:px-28 xl:px-32">
-            <p className="text-xs md:text-sm">
-              2026 @Gafbi - All rights reserved
-            </p>
+            <p className="text-xs md:text-sm">{t("footer.rights")}</p>
             <div className="flex flex-wrap items-center gap-5">
               <a href="#" className="text-[#4c6f91] text-xs md:text-sm">
-                Privacy Policy
+                {t("footer.privacy")}
               </a>
               <a href="#" className="text-[#4c6f91] text-xs md:text-sm">
-                Terms &amp; Conditions
+                {t("footer.terms")}
               </a>
               <a href="#" className="text-[#4c6f91] text-xs md:text-sm">
-                Imprint
+                {t("footer.imprint")}
               </a>
             </div>
           </div>

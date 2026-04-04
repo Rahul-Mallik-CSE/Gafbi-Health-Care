@@ -1,6 +1,9 @@
 /** @format */
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const careBoxFeatures = [
   {
@@ -40,26 +43,24 @@ const careBoxFeatures = [
 ];
 
 export default function CareBoxSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full  py-10">
       <div className="mx-auto w-full max-w-625 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-210 text-center pb-8 md:pb-20">
           <h2 className="animate-in fade-in slide-in-from-bottom-2 duration-500 text-xl font-extrabold leading-tight text-primary sm:text-2xl md:text-3xl lg:text-5xl">
-            Free care aids from{" "}
-            <span className="text-[#a8c153]">#care level 1</span>
+            {t("landing.careTitle")}
           </h2>
           <p className="animate-in fade-in slide-in-from-bottom-1 delay-100 duration-500 mx-auto mt-4 max-w-150 text-base leading-[1.7] text-secondary sm:text-lg md:text-xl">
-            Receive high-quality care products completely free of charge through
-            your long-term care insurance. Customize your personal Care Box with
-            essential daily aids and have it delivered quickly and easily to
-            your home.
+            {t("landing.careDescription")}
           </p>
           <Link href="/apply-box">
             <button
               type="button"
               className="mt-7 cursor-pointer rounded-md bg-button-bg px-6 py-2 text-sm md:text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md active:translate-y-0"
             >
-              Apply for a care box now
+              {t("landing.careApply")}
             </button>
           </Link>
         </div>

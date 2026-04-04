@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const products = [
   {
@@ -33,6 +34,7 @@ const products = [
 ];
 
 export default function ProductsSection() {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
 
   const visibleCount = useMemo(() => {
@@ -61,7 +63,7 @@ export default function ProductsSection() {
     <section className="w-full  px-4 py-12 sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto w-full max-w-625 rounded-[14px] bg-card-bg p-5 sm:p-8 lg:p-10 xl:p-16">
         <h2 className="animate-in fade-in slide-in-from-bottom-2 duration-500 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary ">
-          Trusted care products from Gafbi
+          {t("landing.productsTitle")}
         </h2>
 
         <div className="mt-6 md:mt-12 overflow-hidden px-2 md:px-4 lg:px-6">
@@ -99,7 +101,7 @@ export default function ProductsSection() {
                       type="button"
                       className="rounded-md cursor-pointer bg-button-bg px-2 py-1 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0"
                     >
-                      + Add to box
+                      {t("landing.addToBox")}
                     </button>
                   </div>
                 </div>

@@ -1,12 +1,14 @@
 /** @format */
 
-'use client';
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function ForgotPasswordPage() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -17,7 +19,7 @@ export default function ForgotPasswordPage() {
     // Simulate API call
     setTimeout(() => {
       setLoading(false);
-      toast.success("OTP sent to your email");
+      toast.success(t("toasts.otpSent"));
       router.push("/verify-otp");
     }, 1200);
   };
@@ -38,10 +40,10 @@ export default function ForgotPasswordPage() {
           </h1>
         </div>
         <h2 className="text-lg font-bold text-[#1A4B5A] mb-1">
-          Forgot Password
+          {t("auth.forgotTitle")}
         </h2>
         <p className="text-gray-700 mb-4 text-sm">
-          Enter your email to receive a 4-digit OTP for password reset.
+          {t("auth.forgotDescription")}
         </p>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <input
@@ -57,7 +59,7 @@ export default function ForgotPasswordPage() {
             className="bg-[#1A4B5A] text-white rounded px-3 py-2 font-semibold cursor-pointer"
             disabled={loading}
           >
-            {loading ? "Sending..." : "Send OTP"}
+            {loading ? t("auth.sending") : t("auth.sendOtp")}
           </button>
         </form>
       </div>

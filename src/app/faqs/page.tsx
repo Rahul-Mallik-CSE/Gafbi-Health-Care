@@ -5,6 +5,7 @@
 import Image from "next/image";
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const faqs = [
   {
@@ -40,6 +41,7 @@ const faqs = [
 ];
 
 const FaqsPage = () => {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggleItem = (index: number) => {
@@ -50,17 +52,19 @@ const FaqsPage = () => {
     <main className="min-h-screen bg-[#f4f4f4] px-4 pb-12 pt-3 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
         <div className="mb-6 text-sm text-secondary">
-          <span>Home</span>
+          <span>{t("common.home")}</span>
           <span className="mx-2">/</span>
-          <span>FAQs</span>
+          <span>{t("common.faqs")}</span>
           <span className="mx-2">/</span>
-          <span className="text-[var(--color-button-bg)]">FAQs details</span>
+          <span className="text-[var(--color-button-bg)]">
+            {t("faqPage.details")}
+          </span>
         </div>
 
         <section className="grid gap-8 lg:grid-cols-[1fr_1.45fr]">
           <div>
             <h1 className="mb-5 max-w-xs text-xl md:text-2xl font-semibold leading-tight text-[var(--color-primary)]">
-              Frequently asked questions about the Gafbi care box
+              {t("faqPage.heading")}
             </h1>
             <Image
               src="/faqs-banner.png"

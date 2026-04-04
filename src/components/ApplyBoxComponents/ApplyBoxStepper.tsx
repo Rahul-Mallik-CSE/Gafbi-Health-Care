@@ -9,13 +9,7 @@ import DataEntryStep from "./DataEntryStep";
 import ApplicationStep from "./ApplicationStep";
 import DoneStep from "./DoneStep";
 import Link from "next/link";
-
-const steps = [
-  { id: 1, label: "Product Selection" },
-  { id: 2, label: "Data Entry" },
-  { id: 3, label: "Application" },
-  { id: 4, label: "Done" },
-];
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   selectedProducts: Array<{
@@ -102,6 +96,14 @@ const getInitialFormData = (): FormData => ({
 });
 
 export default function ApplyBoxStepper() {
+  const { t } = useTranslation();
+  const steps = [
+    { id: 1, label: t("apply.productSelection") },
+    { id: 2, label: t("apply.dataEntry") },
+    { id: 3, label: t("apply.application") },
+    { id: 4, label: t("apply.done") },
+  ];
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(getInitialFormData);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
@@ -175,7 +177,7 @@ export default function ApplyBoxStepper() {
     <div className="min-h-screen w-full bg-[#d2d9df] pb-8 sm:pb-12">
       <header className="w-full border-b border-gray-200 bg-white">
         <div className="mx-auto flex w-full max-w-full items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
-          <Link href='/' className="flex items-center gap-2.5">
+          <Link href="/" className="flex items-center gap-2.5">
             <Image
               src="/logo.png"
               alt="Gafbi"
@@ -184,15 +186,15 @@ export default function ApplyBoxStepper() {
               priority
             />
             <p className="text-[30px] font-semibold leading-none text-[#1e5a83]">
-              Gafbi Health Care
+              {t("common.brand")}
             </p>
           </Link>
           <p className="hidden text-center text-base font-semibold text-[#1e5a83] md:block">
-            For help with your application, please call:
+            {t("apply.helpLine")}
             <span className="ml-1 text-[#9cbf4b]">030 / 555 785 042</span>
           </p>
           <button className="rounded-md border border-[#1e5a83] px-3 py-1.5 text-sm font-semibold text-[#1e5a83] transition-colors hover:bg-[#eaf3fa]">
-            Request to change Care Box
+            {t("apply.requestChange")}
           </button>
         </div>
       </header>
@@ -234,18 +236,17 @@ export default function ApplyBoxStepper() {
           {isApplicationCompleted ? (
             <div className="rounded-lg border border-gray-200 bg-white p-6 sm:p-10">
               <h3 className="text-2xl font-bold text-primary">
-                Application submitted successfully
+                {t("apply.appSubmitted")}
               </h3>
               <p className="mt-3 text-sm text-secondary">
-                Thank you. Your application has been received and will be
-                processed shortly.
+                {t("apply.appSubmittedDesc")}
               </p>
               <div className="mt-6">
                 <button
                   onClick={handleStartNewApplication}
                   className="rounded-md bg-button-bg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
                 >
-                  Start a new application
+                  {t("apply.startNew")}
                 </button>
               </div>
             </div>
@@ -257,7 +258,7 @@ export default function ApplyBoxStepper() {
 
       <div className="mx-auto mt-6 block w-full max-w-295 px-4 md:hidden">
         <p className="text-center text-base font-semibold text-[#1e5a83]">
-          For help with your application, please call:
+          {t("apply.helpLine")}
           <span className="ml-1 text-[#9cbf4b]">030 / 555 785 042</span>
         </p>
       </div>

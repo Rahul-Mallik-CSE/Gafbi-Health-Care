@@ -1,8 +1,13 @@
 /** @format */
 
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function AboutSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full  px-4 py-12 sm:px-6 lg:px-8 lg:py-16 ">
       <div className="mx-auto relative w-full max-w-625 overflow-hidden rounded-[18px] bg-[#628db4] py-8 sm:py-12 md:py-16">
@@ -28,13 +33,11 @@ export default function AboutSection() {
 
         <article className="relative z-10 m-5 max-w-220 rounded-lg bg-[#dfe4ea] p-6 text-[#31353b] sm:m-7 sm:p-8  lg:ml-6 xl:ml-[15%]  md:mt-12 md:p-10">
           <h2 className="text-xl font-extrabold leading-tight text-[#1f5f8f] md:text-2xl lg:text-3xl">
-            We supply families throughout Germany with high-quality, consumable
-            care supplies
+            {t("landing.aboutTitle")}
           </h2>
 
           <p className="mt-4 text-sm leading-[1.6] md:text-base lg:text-lg">
-            As a Schülke &amp; Mayr company, we work to the highest standards -
-            for quality you can trust.
+            {t("landing.aboutDescription")}
           </p>
 
           <p className="mt-5 text-sm leading-[1.6] md:text-base lg:text-lg text-secondary">
@@ -55,7 +58,7 @@ export default function AboutSection() {
             type="button"
             className="mt-6 cursor-pointer rounded-md border border-[#1f5f8f] px-4 py-2 text-sm font-semibold text-[#1f5f8f] sm:text-lg"
           >
-            More about us
+            {t("landing.aboutMore")}
           </button>
         </article>
       </div>

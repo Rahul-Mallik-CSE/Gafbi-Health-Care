@@ -5,17 +5,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  { label: "About Us", href: "/#about" },
-  { label: "Carebox", href: "/#carebox" },
-  { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
-  { label: "FAQs", href: "/faqs" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function NavBar() {
+  const { t } = useTranslation();
   const pathname = usePathname();
+
+  const navItems = [
+    { label: t("nav.aboutUs"), href: "/#about" },
+    { label: t("nav.careBox"), href: "/#carebox" },
+    { label: t("common.products"), href: "/products" },
+    { label: t("common.contact"), href: "/contact" },
+    { label: t("common.faqs"), href: "/faqs" },
+  ];
 
   const isActiveLink = (href: string) => {
     if (href.includes("#")) {
@@ -32,7 +34,7 @@ export default function NavBar() {
   return (
     <header className="w-full bg-[#f3f3f3]">
       <div className="mx-auto flex w-full max-w-625 items-center justify-between px-6 py-0.5 lg:px-10">
-         <Link href='/'className="flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-4">
           <Image
             src="/logo.png"
             alt="GAFBI Health Care"
@@ -41,7 +43,7 @@ export default function NavBar() {
             priority
           />
           <p className="text-2xl font-semibold leading-none tracking-tight text-primary">
-            Gafbi Health Care
+            {t("common.brand")}
           </p>
         </Link>
 

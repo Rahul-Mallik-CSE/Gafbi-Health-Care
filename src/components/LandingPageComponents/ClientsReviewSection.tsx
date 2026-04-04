@@ -5,6 +5,7 @@
 import Image from "next/image";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const reviews = [
   {
@@ -30,6 +31,7 @@ const reviews = [
 ];
 
 export default function ClientsReviewSection() {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const maxIndex = Math.max(0, reviews.length - 3);
   const canGoPrev = index > 0;
@@ -41,7 +43,7 @@ export default function ClientsReviewSection() {
     <section className="w-full  px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
       <div className="mx-auto w-full max-w-625 px-2 sm:px-4 md:px-10 lg:px-16 xl:px-24 2xl:px-28">
         <h2 className="animate-in fade-in slide-in-from-bottom-2 duration-500 max-w-130 text-xl font-extrabold leading-[1.15] text-primary sm:text-2xl md:text-3xl lg:text-4xl">
-          Don&apos;t take our word for it, see what our clients say
+          {t("landing.clientsTitle")}
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -105,10 +107,10 @@ export default function ClientsReviewSection() {
                   />
                 ))}
               </span>
-              <span>Excellent</span>
+              <span>{t("landing.clientsExcellent")}</span>
             </p>
             <p className="mt-2 text-sm text-secondary sm:text-base md:text-lg">
-              4.7 ratings based on the 3,219 clients
+              {t("landing.clientsRatings")}
             </p>
           </div>
 
