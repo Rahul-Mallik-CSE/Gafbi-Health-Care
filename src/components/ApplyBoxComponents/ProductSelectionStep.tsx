@@ -8,6 +8,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { LuShoppingBag } from "react-icons/lu";
 import { PiTrashSimple } from "react-icons/pi";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const MAX_ITEMS = 6;
 
@@ -165,7 +166,7 @@ export default function ProductSelectionStep({
 
   const handleContinue = () => {
     if (selectedProducts.length === 0) {
-      alert("Please select at least one product");
+      toast("Please select at least one product");
       return;
     }
 
