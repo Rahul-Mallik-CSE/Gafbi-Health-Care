@@ -3,6 +3,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 const findUsLinks = ["Facebook", "Instagram", "LinkedIn", "Youtube"];
@@ -22,6 +23,16 @@ export default function Footer() {
     t("common.contact"),
     t("nav.aboutUs"),
   ];
+  const pathname = usePathname();
+
+  const HIDDEN_ROUTES = [
+    "/apply-box",
+    "/signin",
+    "/register",
+    "/forgot-password",
+    "/verify-otp",
+  ];
+  if (HIDDEN_ROUTES.includes(pathname)) return null;
 
   return (
     <footer className="w-full mx-auto bg-[#f3f3f3]">

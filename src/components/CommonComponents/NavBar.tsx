@@ -27,7 +27,16 @@ export default function NavBar() {
     return pathname === href;
   };
 
-  if (pathname === "/apply-box") {
+  const HIDDEN_ROUTES = [
+    "/apply-box",
+    "/signin",
+    "/register",
+    "/forgot-password",
+    "/verify-otp",
+    "/apply-box",
+  ];
+
+  if (HIDDEN_ROUTES.includes(pathname)) {
     return null;
   }
 
